@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.decimal4j.util.DoubleRounder;
+
 enum TranType{
 	DEPOSIT,
 	WITHDRAW,
@@ -37,20 +39,20 @@ public class Transaction {
 	 */
 	public Transaction(double amount, TranType type, Date tranDate, double balance, String comments) {
 		super();
-		this.amount = amount;
+		this.amount = DoubleRounder.round(amount, 2);
 		this.type = type;
 		this.tranDate = tranDate;
-		this.balance = balance;
+		this.balance = DoubleRounder.round(balance,2);
 		this.comments = new StringBuilder();
 		this.comments.append(comments);
 	}
 	
 	public Transaction(double amount, TranType type, Date tranDate, double balance) {
 		super();
-		this.amount = amount;
+		this.amount = DoubleRounder.round(amount,2);
 		this.type = type;
 		this.tranDate = tranDate;
-		this.balance = balance;
+		this.balance = DoubleRounder.round(balance,2);
 		this.comments = new StringBuilder();
 	}
 
@@ -58,19 +60,19 @@ public class Transaction {
 
 	
 	public double getBalance() {
-		return balance;
+		return DoubleRounder.round(balance,2);
 	}
 
 	public void setBalance(double balance) {
-		this.balance = balance;
+		this.balance = DoubleRounder.round(balance,2);
 	}
 
 	public double getBalanceAfterTran() {
-		return balanceAfterTran;
+		return DoubleRounder.round(balanceAfterTran,2);
 	}
 
 	public void setBalanceAfterTran(double balanceAfterTran) {
-		this.balanceAfterTran = balanceAfterTran;
+		this.balanceAfterTran = DoubleRounder.round(balanceAfterTran,2);
 	}
 
 	public Long getTransactionID() {
@@ -82,11 +84,11 @@ public class Transaction {
 	}
 
 	public double getAmount() {
-		return amount;
+		return DoubleRounder.round(amount,2);
 	}
 
 	public void setAmount(double amount) {
-		this.amount = amount;
+		this.amount = DoubleRounder.round(amount,2);
 	}
 
 	public TranType getType() {
