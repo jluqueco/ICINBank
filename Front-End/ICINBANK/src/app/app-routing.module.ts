@@ -9,7 +9,7 @@ const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'login', component: LoginComponent},
   {path: 'dashboard/:username', component: DashboardComponent},
-  {path: 'transactionlist/:account', component: TransactionListComponent},
+  {path: 'transactionlist/:accountID', component: TransactionListComponent},
   {path: '**', component: ErrorComponent}
 ];
 

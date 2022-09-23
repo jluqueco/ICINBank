@@ -1,0 +1,24 @@
+<h1>Welcome {{username}} to ICINBANK </h1>
+
+<div>
+    <table border="1">
+        <caption>{{username}} Account's</caption>
+        <thead>
+            <tr>
+                <th>Account ID</th>
+                <th>Type</th>
+                <th>balance</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let account of accounts">
+            <tr>
+                <td>{{account.id}}</td>
+                <td>{{account.type}}</td>
+                <td>{{account.balance}}</td>
+            </tr>
+            <tr>
+                <td colspan="3">details</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
