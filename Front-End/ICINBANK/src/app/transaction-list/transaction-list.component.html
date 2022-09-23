@@ -1,0 +1,27 @@
+<h1>Transaction list for: {{username}}</h1>
+
+<div>
+    <table border="1">
+        <caption>table</caption>
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Balance Before Tran</th>
+                <th>Amount</th>
+                <th>Balance After Tran</th>
+                <th>Transaction Date</th>
+                <th>Comments</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let transaction of transactions">
+                <td>{{transaction.type}}</td>
+                <td>{{transaction.balance}}</td>
+                <td>{{transaction.amount}}</td>
+                <td>{{transaction.balanceAfterTran}}</td>
+                <td>{{transaction.tranDate}}</td>
+                <td>{{transaction.comments}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

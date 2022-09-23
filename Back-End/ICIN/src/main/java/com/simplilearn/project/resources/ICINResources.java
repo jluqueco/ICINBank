@@ -109,10 +109,11 @@ public class ICINResources {
 	//***CHEQUES***
 	
 	//Creates a new book Request
-	@PostMapping(path = "/chequebook/new")
-	public ResponseEntity<ChequeBook> createChequeBook(@RequestBody ChequeBook newCheque){
-		if(newCheque != null) {
-			ChequeBook cheque = chequeBookService.save(newCheque);
+	@PostMapping(path = "/chequebook/new/{accountID}/{requestType}")
+	public ResponseEntity<ChequeBook> createChequeBook(@PathVariable long accountID, @PathVariable int requestType){
+		Account account = accountService.findById(accountID);
+		if(account != null) {
+			ChequeBook cheque = chequeBookService.save(new ChequeBook(account, requestType));
 			return new ResponseEntity<ChequeBook>(cheque, HttpStatus.CREATED);
 		}else {
 			return new ResponseEntity<ChequeBook>(HttpStatus.INTERNAL_SERVER_ERROR);
