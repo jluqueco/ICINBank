@@ -18,6 +18,14 @@ enum ChequeBookStatus{
 	APPROVED,
 	REJECTED
 }
+
+enum ChequeBookType{
+	PAGES15,
+	PAGES30,
+	PAGES50,
+	PAGES100
+}
+
 @Entity
 @Table(name = "CHEQUEBOOKS")
 public class ChequeBook {
@@ -30,6 +38,7 @@ public class ChequeBook {
 	private ChequeBookStatus status;
 	private Date createdDate;
 	private Date lastModifiedDate;
+	private ChequeBookType type;
 	
 	public ChequeBook() {}
 
@@ -37,12 +46,29 @@ public class ChequeBook {
 	 * @param account
 	 * @param user
 	 */
-	public ChequeBook(Account account) {
+	public ChequeBook(Account account, int type) {
 		super();
 		this.account = account;
 		this.status = ChequeBookStatus.NEW;
 		this.createdDate = new Date();
 		this.lastModifiedDate = new Date();
+		
+		switch(type) {
+			case 15: 
+				this.type = ChequeBookType.PAGES15;
+				break;
+			case 30: 
+				this.type = ChequeBookType.PAGES30;
+				break;
+			case 50: 
+				this.type = ChequeBookType.PAGES50;
+				break;
+			case 100: 
+				this.type = ChequeBookType.PAGES100;
+				break;
+			default:
+				this.type = ChequeBookType.PAGES15;
+		}
 	}
 
 	public Account getAccount() {
@@ -79,9 +105,17 @@ public class ChequeBook {
 		return createdDate;
 	}
 
+	public ChequeBookType getType() {
+		return type;
+	}
+
+	public void setType(ChequeBookType type) {
+		this.type = type;
+	}
+
 	@Override
 	public String toString() {
 		return "ChequeBook [chequeBookID=" + chequeBookID + ", account=" + account + ", status=" + status
-				+ ", createdDate=" + createdDate + ", lastModifiedDate=" + lastModifiedDate + "]";
+				+ ", createdDate=" + createdDate + ", lastModifiedDate=" + lastModifiedDate + ", type=" + type + "]";
 	}
 }
