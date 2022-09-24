@@ -24,6 +24,9 @@ export class TransactionListComponent implements OnInit {
     new Transaction('Withdraw',1100,1000,100,new Date(),'Comentando 2'),
     new Transaction('Transfer',1000,1100,100,new Date(),'Comentando 3')
   ]
+  public searchTransaction: any = '';
+  query = '';
+
   constructor(private router:ActivatedRoute) { }
 
   ngOnInit(): void {

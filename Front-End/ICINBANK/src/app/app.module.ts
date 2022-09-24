@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './error/error.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
+import { SearchTransactionPipe } from './search-transaction.pipe';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { TransactionListComponent } from './transaction-list/transaction-list.co
     DashboardComponent,
     LoginComponent,
     ErrorComponent,
-    TransactionListComponent
+    TransactionListComponent,
+    SearchTransactionPipe
   ],
   imports: [
     BrowserModule,
