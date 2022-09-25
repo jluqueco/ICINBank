@@ -1,24 +1,27 @@
 <h1>Welcome {{username}} to ICINBANK </h1>
 
-<div>
-    <table border="1">
-        <caption>{{username}} Account's</caption>
-        <thead>
-            <tr>
-                <th>Account ID</th>
-                <th>Type</th>
-                <th>balance</th>
-            </tr>
-        </thead>
-        <tbody *ngFor="let account of accounts">
-            <tr>
-                <td>{{account.id}}</td>
-                <td>{{account.type}}</td>
-                <td>{{account.balance}}</td>
-            </tr>
-            <tr>
-                <td colspan="3"><a routerLink="/transactionlist/{{account.id}}">details</a></td>
-            </tr>
-        </tbody>
-    </table>
+<div class="container">
+    <div class="table-responsive">       
+        <table class="table table-sm table-striped table-hover">
+            <caption>{{username}} Account's</caption>
+            <thead class="thead-light">
+                <tr>
+                    <th>Account ID</th>
+                    <th>Type</th>
+                    <th>balance</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let account of accounts">
+                <tr></tr>
+                <tr>
+                    <td>{{account.id}}</td>
+                    <td>{{account.type}}</td>
+                    <td>{{account.balance}}</td>
+                </tr>
+                <tr class="table-primary">
+                    <td colspan="3"><a routerLink="/transactionlist/{{account.id}}">Recent Transactions</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

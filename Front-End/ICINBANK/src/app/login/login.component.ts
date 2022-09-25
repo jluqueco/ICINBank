@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,7 @@ export class LoginComponent implements OnInit {
   username = 'jluqueco';
   password = '';
   invalidLogin = false;
+  faSignInAlt = faSignInAlt;
 
   constructor(private router: Router) { }
 

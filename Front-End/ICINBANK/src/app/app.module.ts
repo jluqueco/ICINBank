@@ -9,6 +9,9 @@ import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './error/error.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { SearchTransactionPipe } from './search-transaction.pipe';
+import { MenuComponent } from './menu/menu.component';
+import { FooterComponent } from './footer/footer.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -17,12 +20,15 @@ import { SearchTransactionPipe } from './search-transaction.pipe';
     LoginComponent,
     ErrorComponent,
     TransactionListComponent,
-    SearchTransactionPipe
+    SearchTransactionPipe,
+    MenuComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

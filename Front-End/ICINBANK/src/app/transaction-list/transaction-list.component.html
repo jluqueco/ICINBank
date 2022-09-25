@@ -1,29 +1,32 @@
 <h1>Transaction list for: {{username}}</h1>
-<div>
-    <input type="text" placeholder="Search" [(ngModel)] = "query"/>
+<div class="form-group">
+    <input type="text" class="form-control mb-4 mt-3" placeholder="Search" [(ngModel)] = "query"/>
 </div>
-<div>
-    <table border="1">
-        <caption>table</caption>
-        <thead>
-            <tr>
-                <th>Type</th>
-                <th>Balance Before Tran</th>
-                <th>Amount</th>
-                <th>Balance After Tran</th>
-                <th>Transaction Date</th>
-                <th>Comments</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let transaction of transactions | searchTransaction: query">
-                <td>{{transaction.type}}</td>
-                <td>{{transaction.balance}}</td>
-                <td>{{transaction.amount}}</td>
-                <td>{{transaction.balanceAfterTran}}</td>
-                <td>{{transaction.tranDate | date:'medium' }}</td>
-                <td>{{transaction.comments}}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="container">
+    <div class="table-responsive">    
+        <table class="table table table-striped table-hover">
+            <caption>table</caption>
+            <thead class="thead-light">
+                <tr>
+                    <th>Type</th>
+                    <th>Balance Before Tran</th>
+                    <th>Amount</th>
+                    <th>Balance After Tran</th>
+                    <th>Transaction Date</th>
+                    <th>Comments</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr></tr>
+                <tr *ngFor="let transaction of transactions | searchTransaction: query">
+                    <td>{{transaction.type}}</td>
+                    <td>{{transaction.balance}}</td>
+                    <td>{{transaction.amount}}</td>
+                    <td>{{transaction.balanceAfterTran}}</td>
+                    <td>{{transaction.tranDate | date:'medium' }}</td>
+                    <td>{{transaction.comments}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
