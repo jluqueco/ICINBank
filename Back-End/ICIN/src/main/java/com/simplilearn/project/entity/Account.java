@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import org.decimal4j.util.DoubleRounder;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.simplilearn.project.errors.BlockedAccountException;
 import com.simplilearn.project.errors.ICINTransactionException;
 import com.simplilearn.project.errors.UserAccessException;
@@ -36,7 +37,8 @@ public class Account {
 	@ManyToOne
 	@JoinColumn(name = "username", nullable = false)
 	private User owner;
-	@OneToMany(mappedBy = "transactionID")
+	@OneToMany(mappedBy = "accountID")
+	@JsonManagedReference
 	List<Transaction> transactions;
 	private boolean blockStatus;
 	@Enumerated(EnumType.ORDINAL)
@@ -108,8 +110,7 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return "Account [accountID=" + accountID + ", balance=" + balance + ", owner=" + owner + ", transactions="
-				+ transactions + "]";
+		return "Account [accountID=" + accountID + ", balance=" + balance + ", owner=" + owner + "]";
 	}
 	
 	public Transaction deposit(double amount) {

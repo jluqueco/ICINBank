@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import { ICINAuthenticationService } from '../service/icinauthentication.service';
 
 @Component({
   selector: 'app-login',
@@ -13,13 +14,15 @@ export class LoginComponent implements OnInit {
   invalidLogin = false;
   faSignInAlt = faSignInAlt;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authenticationService: ICINAuthenticationService) { }
 
   ngOnInit(): void {
   }
 
   handleClick(){
-    if(this.username === 'jluqueco' && this.password === '93wchsrs'){
+    this.authenticationService.authenticate(this.username,this.password)
+    this.invalidLogin = this.authenticationService.authenticateUpdate(this.username);
+    if(this.invalidLogin){
       this.invalidLogin = false;
       this.router.navigate(['dashboard', this.username]);
     }else{

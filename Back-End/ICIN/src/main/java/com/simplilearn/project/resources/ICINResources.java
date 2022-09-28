@@ -79,6 +79,22 @@ public class ICINResources {
 		}
 	}
 	
+	//checks authentication parameters
+	@GetMapping(path = "/user/{username}/{password}")
+	public ResponseEntity<Boolean> authenticateUser(@PathVariable String username, @PathVariable String password) {
+		if(username != null && password != null) {
+			User user = userService.findById(username);
+			System.out.println("User found " + user);
+			if(user.getPassword().equals(password)) {
+				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+			}else {
+				return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+			}
+		}else {
+			return new ResponseEntity<Boolean>(false, HttpStatus.NOT_FOUND);
+		}
+	}
+	
 	//***ACCOUNTS***
 	
 	//Account List
@@ -106,6 +122,16 @@ public class ICINResources {
 			return new ResponseEntity<Account>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	//return the transactions of an account
+	@GetMapping(path = "/transactionlist/{accountID}")
+	public List<Transaction> getTransactionsByAccountID(@PathVariable long accountID){
+		Account account = accountService.findById(accountID);
+		System.out.println("\n\n" + account.getTransactions()+"\n\n");
+		
+		return account.getTransactions();
+	}
+	
 	//***CHEQUES***
 	
 	//Creates a new book Request

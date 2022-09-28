@@ -1,27 +1,54 @@
-<h1>Welcome {{username}} to ICINBANK </h1>
+<div class="title"><h1>Welcome {{username}} to ICINBANK </h1></div>
 
 <div class="container">
-    <div class="table-responsive">       
-        <table class="table table-sm table-striped table-hover">
-            <caption>{{username}} Account's</caption>
-            <thead class="thead-light">
-                <tr>
-                    <th>Account ID</th>
-                    <th>Type</th>
-                    <th>balance</th>
-                </tr>
-            </thead>
-            <tbody *ngFor="let account of accounts">
-                <tr></tr>
-                <tr>
-                    <td>{{account.id}}</td>
-                    <td>{{account.type}}</td>
-                    <td>{{account.balance}}</td>
-                </tr>
-                <tr class="table-primary">
-                    <td colspan="3"><a routerLink="/transactionlist/{{account.id}}">Recent Transactions</a></td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="row">       
+        <div class="col-md-4">
+            <div class="table-responsive">
+                <table class="table table-sm table-striped table-hover">
+                    <caption>{{username}} Account's</caption>
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Account ID</th>
+                            <th>Type</th>
+                            <th>balance</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let account of accounts">
+                        <tr></tr>
+                        <tr>
+                            <td>{{account.accountID}}</td>
+                            <td>{{account.type}}</td>
+                            <td>{{account.balance | currency}}</td>
+                        </tr>
+                        <tr class="table-primary">
+                            <td colspan="4"><a routerLink="/transactionlist/{{account.accountID}}">Recent Transactions</a><fa-icon class="arrow" [icon]="faArrowRight" size="sm"></fa-icon></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-3">
+                    <fa-icon class="iconTransaction" [icon]="faMoneyCheck" size="lg"></fa-icon>
+                    <div class="row">
+                        <div class="cell"><a routerLink="/deposit/">Go to Deposit</a><fa-icon class="arrow" [icon]="faArrowRight" size="sm"></fa-icon></div>
+                    </div>    
+                </div>
+                <div class="col-md-3">
+                    <fa-icon class="iconTransaction" [icon]="faMoneyBill" size="lg"></fa-icon>
+                    <div class="row">
+                        <div class="cell">Go to Withdraw <fa-icon class="arrow" [icon]="faArrowRight" size="sm"></fa-icon></div>
+                    </div>  
+                </div>
+                <div class="col-md-3">
+                    <fa-icon class="iconTransaction" [icon]="faExchangeAlt" size="lg"></fa-icon>
+                    <div class="row">
+                        <div class="cell">Go to Transfer <fa-icon class="arrow" [icon]="faArrowRight" size="sm"></fa-icon></div>
+                    </div> 
+                </div>
+            </div>
+        </div>
     </div>
 </div>

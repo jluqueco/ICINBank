@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +13,9 @@ import { SearchTransactionPipe } from './search-transaction.pipe';
 import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LogoutComponent } from './logout/logout.component';
+import { DepositComponent } from './deposit/deposit.component';
+
 
 @NgModule({
   declarations: [
@@ -22,13 +26,16 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     TransactionListComponent,
     SearchTransactionPipe,
     MenuComponent,
-    FooterComponent
+    FooterComponent,
+    LogoutComponent,
+    DepositComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

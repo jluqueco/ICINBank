@@ -12,3 +12,4 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 	@Query("select a from accounts a where a.owner.username = ?1" )
 	public List<Account> getUserAccounts(String username);
 }
+	

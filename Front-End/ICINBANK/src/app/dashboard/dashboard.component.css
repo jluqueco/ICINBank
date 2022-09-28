@@ -1,0 +1,22 @@
+.arrow {
+    color: #007BFF;
+    float: right;
+    margin-left: 20px;
+}
+
+.title{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.iconTransaction{
+    font-size: 75px;
+    color: #DC3545;
+}
+
+.cell{
+    background-color: #b8daff;
+    padding-left: 10px;
+    padding-right: 10px;
+}
