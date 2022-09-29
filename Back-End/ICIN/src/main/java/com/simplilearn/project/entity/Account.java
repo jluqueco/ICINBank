@@ -1,6 +1,7 @@
 package com.simplilearn.project.entity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.simplilearn.project.errors.BlockedAccountException;
 import com.simplilearn.project.errors.ICINTransactionException;
 import com.simplilearn.project.errors.UserAccessException;
+import com.simplilearn.project.utility.SortTransactions;
 
 enum AccountType{
 	PRIMARY,
@@ -85,6 +87,7 @@ public class Account {
 	}
 
 	public List<Transaction> getTransactions() {
+		Collections.sort(transactions, new SortTransactions());  //sort desc
 		return transactions;
 	}
 
@@ -117,6 +120,27 @@ public class Account {
 		if(!blockStatus) {
 			if(owner.getUserAccess()[0] && owner.isUserActive()) {
 					Transaction t = new Transaction(amount,TranType.DEPOSIT,new Date(),getBalance());
+					
+					if(amount > 0) {
+						balance = DoubleRounder.round(balance + amount, 2);
+					}else {
+						throw new ICINTransactionException("No negative deposits allowed");
+					}
+					
+					t.setBalanceAfterTran(balance);
+					return t;
+			}else {
+				throw new UserAccessException("User not allowed to deposit");
+			}
+		}else {
+			throw new BlockedAccountException("Account is blocked");
+		}
+	}
+	
+	public Transaction deposit(double amount, String comments) {
+		if(!blockStatus) {
+			if(owner.getUserAccess()[0] && owner.isUserActive()) {
+					Transaction t = new Transaction(amount,TranType.DEPOSIT,new Date(),getBalance(), comments);
 					
 					if(amount > 0) {
 						balance = DoubleRounder.round(balance + amount, 2);

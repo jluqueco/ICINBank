@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">       
         <div class="col-md-4">
-            <div class="table-responsive">
+            <!-- <div class="table-responsive"> -->
                 <table class="table table-sm table-striped table-hover">
                     <caption>{{username}} Account's</caption>
                     <thead class="thead-light">
@@ -25,7 +25,7 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            <!-- </div> -->
         </div>
         <div class="col-md-8">
             <div class="row">
@@ -33,7 +33,7 @@
                 <div class="col-md-3">
                     <fa-icon class="iconTransaction" [icon]="faMoneyCheck" size="lg"></fa-icon>
                     <div class="row">
-                        <div class="cell"><a routerLink="/deposit/">Go to Deposit</a><fa-icon class="arrow" [icon]="faArrowRight" size="sm"></fa-icon></div>
+                        <div class="cell"><a routerLink="/deposit/{{username}}">Go to Deposit</a><fa-icon class="arrow" [icon]="faArrowRight" size="sm"></fa-icon></div>
                     </div>    
                 </div>
                 <div class="col-md-3">

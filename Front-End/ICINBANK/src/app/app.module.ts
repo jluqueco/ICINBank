@@ -15,6 +15,7 @@ import { FooterComponent } from './footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LogoutComponent } from './logout/logout.component';
 import { DepositComponent } from './deposit/deposit.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { DepositComponent } from './deposit/deposit.component';
     AppRoutingModule,
     FormsModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

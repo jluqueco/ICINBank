@@ -1,10 +1,44 @@
-<h1>Deposit</h1>
+<script>
+  var disableButton = (e) => {
+    $('#my-button').prop('disabled',true);
+  }
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6">
-            Account No.
-        </div>
-        <div class="col-sm-6"> Dropdown</div>
+  $document.on('click', '#my-button',disableButton);
+
+  console.log('Disabling button');
+</script>
+
+
+<h1 class="title">Deposit</h1>
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <form (ngSubmit)="deposit()" #todoForm="ngForm">
+      <div class="row">
+      <fieldset class="form-group mb-3">
+          <label>Select Account</label>
+          <select [(ngModel)]="accselected" class="form-select" name="dropdown">
+            <option *ngFor="let account of accounts" [value]="account.accountID">{{account.accountID}} / {{account.type}} / {{account.balance | currency}}</option>
+          </select>
+      </fieldset></div>
+
+      <fieldset class="input-group mb-3">
+          <span class="input-group-text">Amount $</span>
+          <input type="text" class="form-control" name="amount" [(ngModel)] = "amount" />
+      </fieldset>
+
+      <fieldset class="input-group mb-3">
+        <span class="input-group-text">Notes</span>
+        <textarea class="form-control" aria-label="With textarea" name = "comment" [(ngModel)] = "comment"></textarea>
+      </fieldset>
+
+      <button id="my-button" type="submit" class="btn btn-danger">Deposit</button>
+    </form>
+    <div class="alert alert-success" *ngIf="todoForm.dirty && successful">
+      {{transaction.type}} Transaction#: {{transaction.transactionID}} was successful, proceed to <a routerLink="/dashboard/{{username}}"> Home</a>
+      or make another <a routerLink="deposit/{{username}}">Deposit</a> 
     </div>
+  </div>
+  <div class="col-md-4"></div>
 </div>
+

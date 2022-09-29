@@ -1,5 +1,6 @@
 package com.simplilearn.project.entity;
 
+import java.util.Comparator;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -145,8 +146,5 @@ public class Transaction {
 				+ tranDate + ", balance=" + balance + ", balanceAfterTran=" + balanceAfterTran + ", comments="
 				+ comments + ", accountID=" + accountID + "]";
 	}
-
-	
-	
 	
 }

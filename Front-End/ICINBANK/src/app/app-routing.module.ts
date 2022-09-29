@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'dashboard/:username', component: DashboardComponent, canActivate:[RouteGuardService]},
   {path: 'transactionlist/:accountID', component: TransactionListComponent, canActivate:[RouteGuardService]},
   {path: 'logout', component: LogoutComponent, canActivate:[RouteGuardService]},
-  {path: 'deposit', component: DepositComponent, canActivate:[RouteGuardService]},
+  {path: 'deposit/:username', component: DepositComponent, canActivate:[RouteGuardService]},
   {path: '**', component: ErrorComponent}
 ];
 

@@ -167,11 +167,12 @@ public class ICINResources {
 	
 	//***TRANSACTIONS***
 	//deposit
-	@GetMapping(path = "/transaction/deposit/{acc}/{amount}")
-	public ResponseEntity<Transaction> deposit(@PathVariable long acc, @PathVariable double amount){
+	@GetMapping(path = "/transaction/deposit/{acc}/{amount}/{comment}")
+	public ResponseEntity<Transaction> deposit(@PathVariable long acc, @PathVariable double amount, @PathVariable String comment){
 		Account account = accountService.findById(acc);
 		if(account != null) {
-			Transaction tran = account.deposit(amount);
+			Transaction tran = account.deposit(amount, comment);
+			tran.setAccountID(account);
 			transactionService.save(tran);
 			return new ResponseEntity<Transaction>(tran, HttpStatus.OK);
 		}else {
