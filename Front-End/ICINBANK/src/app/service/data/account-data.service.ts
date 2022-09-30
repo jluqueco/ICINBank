@@ -16,4 +16,8 @@ export class AccountDataService {
   deposit(accountID: number, amount: number, comment: string){
     return this.http.get<Transaction>(`http://localhost:8080/transaction/deposit/${accountID}/${amount}/${comment}`);
   }
+
+  withdraw(accountID: number, amount: number, comment: string){
+    return this.http.get<Transaction>(`http://localhost:8080/transaction/withdraw/${accountID}/${amount}/${comment}`);
+  }
 }

@@ -1,11 +1,22 @@
-<h1>LOGIN</h1>
-<div class="container">   
-    <div class="alert alert-danger"  *ngIf="invalidLogin">Invalid Credentials</div>
-    <div>
-        Username: <input type = "text" name="username" [(ngModel)] = "username">
-
-        Password:<input type="password" name="password" [(ngModel)] = "password">
-
-        <button class="btn btn-primary" (click)=handleClick()>Log In <fa-icon [icon]="faSignInAlt" size="sm"></fa-icon></button>
+<h1 class="title">LOGIN</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form (ngSubmit)="handleClick()" #todoForm="ngForm">   
+                <div class="alert alert-danger"  *ngIf="invalidLogin">Invalid Credentials</div>
+                <fieldset class="input-group mb-3">
+                    <span class="input-group-text">Username</span> 
+                    <input type = "text" class="form-control" name="username" [(ngModel)] = "username">
+                </fieldset>
+                <fieldset class="input-group mb-3">
+                    <span class="input-group-text">Password </span>
+                    <input type="password" class="form-control" name="password" [(ngModel)] = "password">
+                </fieldset>
+                    
+                <button class="btn btn-danger">Log In <fa-icon [icon]="faSignInAlt" size="sm"></fa-icon></button>
+            </form>
+        </div>
+        <div class="col-md-4"></div>
     </div>
 </div>

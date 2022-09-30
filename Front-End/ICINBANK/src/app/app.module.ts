@@ -16,6 +16,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LogoutComponent } from './logout/logout.component';
 import { DepositComponent } from './deposit/deposit.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { WithdrawComponent } from './withdraw/withdraw.component';
+import { TransferComponent } from './transfer/transfer.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MenuComponent,
     FooterComponent,
     LogoutComponent,
-    DepositComponent
+    DepositComponent,
+    WithdrawComponent,
+    TransferComponent
   ],
   imports: [
     BrowserModule,

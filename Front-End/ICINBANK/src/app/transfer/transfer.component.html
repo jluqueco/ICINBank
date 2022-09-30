@@ -1,0 +1,46 @@
+<h1 class="title">Transfer</h1>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <!-- <div class="alert alert-success" *ngIf="todoForm.dirty && successful">
+            {{transaction.type}} Transaction#: {{transaction.transactionID}} was successful, 
+            your new balance is: {{transaction.balanceAfterTran | currency}}
+        </div> -->
+    </div>
+    <div class="col-md-4"></div>
+</div>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <form (ngSubmit)="transfer()" #todoForm="ngForm">
+        <fieldset class="form-group mb-3">
+            <label>From Account</label>
+            <select [(ngModel)]="fromAcc" class="form-select" name="dropdownFrom">
+              <option *ngFor="let account of accounts" [value]="account.accountID">{{account.accountID}} / {{account.type}} / {{account.balance | currency}}</option>
+            </select>
+        </fieldset>
+
+        <fieldset class="form-group mb-3">
+            <label>To Account</label>
+            <select [(ngModel)]="toAcc" class="form-select" name="dropdownto">
+              <option *ngFor="let account of accounts" [value]="account.accountID">{{account.accountID}} / {{account.type}} / {{account.balance | currency}}</option>
+            </select>
+        </fieldset>
+  
+        <fieldset class="input-group mb-3">
+            <span class="input-group-text">Amount $</span>
+            <input type="text" class="form-control" name="amount" [(ngModel)] = "amount" />
+        </fieldset>
+  
+        <fieldset class="input-group mb-3">
+          <span class="input-group-text">Notes</span>
+          <textarea class="form-control" aria-label="With textarea" name = "comment" [(ngModel)] = "comment"></textarea>
+        </fieldset>
+  
+        <button id="my-button" type="submit" class="btn btn-danger">Withdraw</button>
+      </form>
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+  

@@ -33,6 +33,10 @@ export class DepositComponent implements OnInit {
   deposit(){
     
     if(this.accselected > 0){
+      if(this.comment === ''){
+        this.comment = 'None'
+      }
+
       this.accountData.deposit(this.accselected, this.amount, this.comment).subscribe(
         response => {
           console.log('deposit on ' + this.accselected );

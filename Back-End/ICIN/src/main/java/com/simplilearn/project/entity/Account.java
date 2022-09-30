@@ -179,6 +179,27 @@ public class Account {
 		}
 	}
 	
+	public Transaction withdraw(double amount, String comment) {
+		if(!blockStatus) {
+			if(owner.getUserAccess()[1] && owner.isUserActive()) {
+				Transaction t = new Transaction(amount,TranType.WITHDRAW,new Date(),getBalance(), comment);
+				
+				if(balance - amount >= 0) {
+					balance = DoubleRounder.round(balance - amount, 2);
+				}else {
+					throw new ICINTransactionException("amount cannot be greater than balance");
+				}
+				
+				t.setBalanceAfterTran(balance);
+				return t;
+			}else {
+				throw new UserAccessException("User not allowed to withdraw");
+			}
+		}else {
+			throw new BlockedAccountException("Account is blocked");
+		}
+	}
+	
 	public Transaction[] transfer(double amount, Account destAccount) {
 		if(!blockStatus) {
 			if(owner.getUserAccess()[2] && owner.isUserActive()) {

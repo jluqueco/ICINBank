@@ -181,11 +181,12 @@ public class ICINResources {
 	}
 	
 	//Withdraw
-	@GetMapping(path = "/transaction/withdraw/{acc}/{amount}")
-	public ResponseEntity<Transaction> withdraw(@PathVariable long acc, @PathVariable double amount){
+	@GetMapping(path = "/transaction/withdraw/{acc}/{amount}/{comment}")
+	public ResponseEntity<Transaction> withdraw(@PathVariable long acc, @PathVariable double amount, @PathVariable String comment){
 		Account account = accountService.findById(acc);
 		if(account != null) {
-			Transaction tran = account.withdraw(amount);
+			Transaction tran = account.withdraw(amount, comment);
+			tran.setAccountID(account);
 			transactionService.save(tran);
 			return new ResponseEntity<Transaction>(tran, HttpStatus.OK);
 		}else {
