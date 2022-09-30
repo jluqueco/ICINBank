@@ -24,3 +24,7 @@
 .content-wrap{
     padding-bottom: 2.5rem;
 }
+
+.input-group-text {
+    width: 100px;
+}

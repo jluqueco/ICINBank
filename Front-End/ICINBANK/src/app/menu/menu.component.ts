@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faPiggyBank } from '@fortawesome/free-solid-svg-icons';
+import { faPiggyBank, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ICINAuthenticationService } from '../service/icinauthentication.service';
 
 @Component({
@@ -9,16 +9,24 @@ import { ICINAuthenticationService } from '../service/icinauthentication.service
 })
 export class MenuComponent implements OnInit {
   faCoffee = faPiggyBank;
+  faUser= faUser;
   isUserLoggedIn = false;
   user: string | null = '';
 
   constructor(public authenticationService: ICINAuthenticationService) { }
 
   ngOnInit(): void {
+    
+  }
+
+  userloggedIn(){
     this.isUserLoggedIn = this.authenticationService.isUserLoggedIn();
     if(this.isUserLoggedIn){
       this.user = this.authenticationService.getUserLoggedIn();
+      console.log('from menu, user athenticated: ' + this.user);
     }
+
+    return this.isUserLoggedIn;
   }
 
 }

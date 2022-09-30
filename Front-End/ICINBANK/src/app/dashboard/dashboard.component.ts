@@ -20,8 +20,8 @@ export class User{
   constructor(
     public username: string,
     public name: string,
-    public lastname: string,
-    public birthday: Date,
+    public lastName: string,
+    public birthdate: Date,
     public phone: string,
     public userAdmin: boolean,
     public password: string,

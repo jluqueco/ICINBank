@@ -18,6 +18,7 @@ import { DepositComponent } from './deposit/deposit.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { WithdrawComponent } from './withdraw/withdraw.component';
 import { TransferComponent } from './transfer/transfer.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { TransferComponent } from './transfer/transfer.component';
     LogoutComponent,
     DepositComponent,
     WithdrawComponent,
-    TransferComponent
+    TransferComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

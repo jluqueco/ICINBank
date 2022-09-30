@@ -8,6 +8,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { RouteGuardService } from './service/route-guard.service';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransferComponent } from './transfer/transfer.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 import { WithdrawComponent } from './withdraw/withdraw.component';
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'deposit/:username', component: DepositComponent, canActivate:[RouteGuardService]},
   {path: 'withdraw/:username', component: WithdrawComponent, canActivate:[RouteGuardService]},
   {path: 'transfer/:username', component: TransferComponent, canActivate:[RouteGuardService]},
+  {path: 'userprofile/:username', component: UserProfileComponent, canActivate:[RouteGuardService]},
   {path: '**', component: ErrorComponent}
 ];
 
