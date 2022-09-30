@@ -13,11 +13,23 @@ export class AccountDataService {
     return this.http.get<Account[]>(`http://localhost:8080/account/${username}`);
   }
 
+  getAccountsButID(username: string, acc: number){
+    return this.http.get<Account[]>(`http://localhost:8080/account/${username}/${acc}`);
+  }
+
   deposit(accountID: number, amount: number, comment: string){
     return this.http.get<Transaction>(`http://localhost:8080/transaction/deposit/${accountID}/${amount}/${comment}`);
   }
 
   withdraw(accountID: number, amount: number, comment: string){
     return this.http.get<Transaction>(`http://localhost:8080/transaction/withdraw/${accountID}/${amount}/${comment}`);
+  }
+
+  transfer(accountIDOri: number, amount: number, accountIDDest:number, comment: string){
+    if(comment === ''){
+      return this.http.get<Transaction[]>(`http://localhost:8080/transaction/transfer/${accountIDOri}/${accountIDDest}/${amount}`);  
+    }else{
+      return this.http.get<Transaction[]>(`http://localhost:8080/transaction/transfer/${accountIDOri}/${accountIDDest}/${amount}/${comment}`);
+    }
   }
 }

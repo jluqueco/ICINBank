@@ -1,6 +1,5 @@
 package com.simplilearn.project.entity;
 
-import java.util.Comparator;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -125,7 +124,7 @@ public class Transaction {
 	}
 	
 	public void addToComments(String comment) {
-		this.comments.append(" ").append(comment);
+		this.comments.append(" - ").append(comment);
 	}
 
 	public Account getAccountID() {

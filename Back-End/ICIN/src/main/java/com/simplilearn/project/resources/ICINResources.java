@@ -109,6 +109,15 @@ public class ICINResources {
 		return accountService.findUserAccounts(username);
 	}
 	
+	//List of accounts by username deleteing a node
+	@GetMapping(path = "/account/{username}/{account}")
+	public List<Account> getUserAccountButID(@PathVariable String username, @PathVariable long account){
+		List<Account> accounts = accountService.findUserAccounts(username);
+		accounts.removeIf(x -> (x.getAccountID() == account));
+		
+		return accounts;
+	}
+	
 	//block/unblock account
 	@PutMapping(path = "/account/{accID}/{accountStatus}")
 	public ResponseEntity<Account> blockAccount(@PathVariable long accID, @PathVariable boolean accountStatus){
@@ -201,6 +210,8 @@ public class ICINResources {
 		Account accountDest = accountService.findById(accdest);
 		if(accountOri != null && accountDest != null) {
 			Transaction tran[] = accountOri.transfer(amount, accountDest);
+			tran[0].setAccountID(accountOri);
+			tran[1].setAccountID(accountDest);
 			transactionService.save(tran[0]);
 			transactionService.save(tran[1]);
 			return new ResponseEntity<Transaction[]>(tran, HttpStatus.OK);
@@ -208,4 +219,21 @@ public class ICINResources {
 			return new ResponseEntity<Transaction[]>(HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	//Transfer
+		@GetMapping(path = "/transaction/transfer/{accori}/{accdest}/{amount}/{comment}")
+		public ResponseEntity<Transaction[]> transferWithComments(@PathVariable long accori, @PathVariable double amount, @PathVariable long accdest, @PathVariable String comment){
+			Account accountOri = accountService.findById(accori);
+			Account accountDest = accountService.findById(accdest);
+			if(accountOri != null && accountDest != null) {
+				Transaction tran[] = accountOri.transfer(amount, accountDest, comment);
+				tran[0].setAccountID(accountOri);
+				tran[1].setAccountID(accountDest);
+				transactionService.save(tran[0]);
+				transactionService.save(tran[1]);
+				return new ResponseEntity<Transaction[]>(tran, HttpStatus.OK);
+			}else {
+				return new ResponseEntity<Transaction[]>(HttpStatus.NOT_FOUND);
+			}
+		}
 }

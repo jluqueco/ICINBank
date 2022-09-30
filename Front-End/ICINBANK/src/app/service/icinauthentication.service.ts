@@ -24,6 +24,12 @@ export class ICINAuthenticationService {
     return !(user === null);
   }
 
+  getUserLoggedIn(){
+    let user = sessionStorage.getItem('authenticatedUser');
+
+    return user;
+  }
+
   logout(){
     sessionStorage.removeItem('authenticatedUser');
   }

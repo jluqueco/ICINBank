@@ -39,7 +39,6 @@ ngOnInit(): void {
     if(this.accselected > 0){
       this.accountData.withdraw(this.accselected, this.amount, this.comment).subscribe(
         response => {
-          console.log('withdraw on ' + this.accselected );
           this.transaction = response;
           this.successful = true;
           this.accselected = 0;

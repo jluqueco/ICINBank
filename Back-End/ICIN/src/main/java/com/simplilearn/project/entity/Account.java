@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.decimal4j.util.DoubleRounder;
+import org.springframework.boot.origin.Origin;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.simplilearn.project.errors.BlockedAccountException;
@@ -206,6 +207,30 @@ public class Account {
 				Transaction tArray[] = new Transaction[2]; //0 for origin, 1 for dest
 				if(destAccount != null && (balance - amount) > 0) {
 					Transaction origin = new Transaction(amount,TranType.TRANSFER_OUT,new Date(),getBalance(), "Transfer made to: " + destAccount.getOwner().getUsername());
+					balance = DoubleRounder.round(balance - amount, 2);
+					tArray[1] = transferIn(amount, destAccount);
+					origin.setBalanceAfterTran(balance);
+					tArray[0] = origin;
+				}else {
+					throw new ICINTransactionException("transfers cannot exceed the balance amount");
+				}
+				
+				return tArray;
+			}else{
+				throw new UserAccessException("User not allowed to do transfers");
+			}
+		}else {
+			throw new BlockedAccountException("Account is blocked");
+		}
+	}
+	
+	public Transaction[] transfer(double amount, Account destAccount, String comment) {
+		if(!blockStatus) {
+			if(owner.getUserAccess()[2] && owner.isUserActive()) {
+				Transaction tArray[] = new Transaction[2]; //0 for origin, 1 for dest
+				if(destAccount != null && (balance - amount) > 0) {
+					Transaction origin = new Transaction(amount,TranType.TRANSFER_OUT,new Date(),getBalance(), "Transfer made to: " + destAccount.getOwner().getUsername());
+					origin.addToComments(comment);
 					balance = DoubleRounder.round(balance - amount, 2);
 					tArray[1] = transferIn(amount, destAccount);
 					origin.setBalanceAfterTran(balance);

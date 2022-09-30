@@ -10,11 +10,15 @@ import { ICINAuthenticationService } from '../service/icinauthentication.service
 export class MenuComponent implements OnInit {
   faCoffee = faPiggyBank;
   isUserLoggedIn = false;
+  user: string | null = '';
 
   constructor(public authenticationService: ICINAuthenticationService) { }
 
   ngOnInit(): void {
     this.isUserLoggedIn = this.authenticationService.isUserLoggedIn();
+    if(this.isUserLoggedIn){
+      this.user = this.authenticationService.getUserLoggedIn();
+    }
   }
 
 }

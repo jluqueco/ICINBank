@@ -2,10 +2,10 @@
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
-        <!-- <div class="alert alert-success" *ngIf="todoForm.dirty && successful">
-            {{transaction.type}} Transaction#: {{transaction.transactionID}} was successful, 
-            your new balance is: {{transaction.balanceAfterTran | currency}}
-        </div> -->
+        <div class="alert alert-success" *ngIf="todoForm.dirty && successful">
+            {{tranOri.type}} Transaction#: {{tranOri.transactionID}} was successful, 
+            your new balance is: {{tranOri.balanceAfterTran | currency}}
+        </div> 
     </div>
     <div class="col-md-4"></div>
 </div>
@@ -15,7 +15,7 @@
       <form (ngSubmit)="transfer()" #todoForm="ngForm">
         <fieldset class="form-group mb-3">
             <label>From Account</label>
-            <select [(ngModel)]="fromAcc" class="form-select" name="dropdownFrom">
+            <select [(ngModel)]="fromAcc" (ngModelChange)="onChange($event)" class="form-select" name="dropdownFrom">
               <option *ngFor="let account of accounts" [value]="account.accountID">{{account.accountID}} / {{account.type}} / {{account.balance | currency}}</option>
             </select>
         </fieldset>
@@ -23,7 +23,7 @@
         <fieldset class="form-group mb-3">
             <label>To Account</label>
             <select [(ngModel)]="toAcc" class="form-select" name="dropdownto">
-              <option *ngFor="let account of accounts" [value]="account.accountID">{{account.accountID}} / {{account.type}} / {{account.balance | currency}}</option>
+              <option *ngFor="let account of accountsTo" [value]="account.accountID">{{account.accountID}} / {{account.type}} / {{account.balance | currency}}</option>
             </select>
         </fieldset>
   
@@ -37,7 +37,7 @@
           <textarea class="form-control" aria-label="With textarea" name = "comment" [(ngModel)] = "comment"></textarea>
         </fieldset>
   
-        <button id="my-button" type="submit" class="btn btn-danger">Withdraw</button>
+        <button id="my-button" type="submit" class="btn btn-danger">Transfer</button>
       </form>
     </div>
     <div class="col-md-4">
