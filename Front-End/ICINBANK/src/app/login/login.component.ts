@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('authenticatedUser', this.username);
           this.userData.getUser(this.username).subscribe(
             response => {
+              console.log(response);
               if(response.userAdmin){
                 this.router.navigate(['useradmindashboard',this.username]);
               }else{

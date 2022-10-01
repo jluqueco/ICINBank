@@ -3,8 +3,6 @@ package com.simplilearn.project.errors;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.simplilearn.project.entity.ChequeBook;
-
 @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
 public class ChequeBookStatusException extends RuntimeException {
 

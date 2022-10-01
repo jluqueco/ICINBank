@@ -12,7 +12,7 @@ import { UserDataService } from '../service/data/user-data.service';
 export class UserProfileComponent implements OnInit {
 
   username: any;
-  user!: User;
+  user: User = new User('','','',new Date(),'',false,'',[false,false,false],true);
   accounts: Account[] = [];
 
   constructor(private router:ActivatedRoute, 

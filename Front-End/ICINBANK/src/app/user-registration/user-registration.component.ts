@@ -15,7 +15,7 @@ export class UserRegistrationComponent implements OnInit {
   constructor(private router: Router, private userData: UserDataService) { }
 
   ngOnInit(): void {
-    this.user = new User('','','',new Date(),'',false,'',false,false,false,true);
+    this.user = new User('','','',new Date(),'',false,'',[false,false,false],true);
   }
 
   register() {
@@ -23,7 +23,7 @@ export class UserRegistrationComponent implements OnInit {
       data => {
         console.log(data);
         this.success = true;
-        this.user = new User('','','',new Date(),'',false,'',false,false,false,true);
+        this.user = new User('','','',new Date(),'',false,'',[false,false,false],true);
       }
     )
   }
