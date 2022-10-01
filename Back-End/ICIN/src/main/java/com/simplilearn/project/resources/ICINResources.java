@@ -1,5 +1,6 @@
 package com.simplilearn.project.resources;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,14 @@ public class ICINResources {
 	}
 	
 	//New User
+	@PostMapping(path = "/user/{username}/{name}/{lastName}/{birthdate}/{phone}")
+	public ResponseEntity<User> createUser(@PathVariable String username, @PathVariable String name, @PathVariable String lastName, @PathVariable Date birthdate, @PathVariable String phone){
+		User newUser = new User(username, name, lastName, birthdate, phone);
+		User userCreated = userService.save(newUser);
+		return new ResponseEntity<User>(userCreated, HttpStatus.CREATED);
+	}
+	
+	//New User
 	@PostMapping(path = "/user/new")
 	public ResponseEntity<User> createUser(@RequestBody User newUser){
 		if(newUser != null) {
@@ -84,11 +93,10 @@ public class ICINResources {
 	public ResponseEntity<Boolean> authenticateUser(@PathVariable String username, @PathVariable String password) {
 		if(username != null && password != null) {
 			User user = userService.findById(username);
-			System.out.println("User found " + user);
 			if(user.getPassword().equals(password)) {
 				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 			}else {
-				return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+				return new ResponseEntity<Boolean>(false, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}else {
 			return new ResponseEntity<Boolean>(false, HttpStatus.NOT_FOUND);

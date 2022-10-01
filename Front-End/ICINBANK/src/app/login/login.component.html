@@ -1,4 +1,8 @@
-<h1 class="title">LOGIN</h1>
+<script text="application/javascript">
+    $('#example').tooltip(options)
+</script>
+
+<h1 class="title">LOG IN</h1>
 <div class="container">
     <div class="row">
         <div class="col-md-4"></div>
@@ -16,6 +20,10 @@
                     
                 <button class="btn btn-danger">Log In <fa-icon [icon]="faSignInAlt" size="sm"></fa-icon></button>
             </form>
+            <button class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" 
+                    title="Click here if you have not register to our portal yet." (click) = register()>
+                Register <fa-icon [icon]="faUserPlus" size="sm"></fa-icon>
+            </button>
         </div>
         <div class="col-md-4"></div>
     </div>

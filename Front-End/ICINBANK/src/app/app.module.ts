@@ -19,6 +19,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { WithdrawComponent } from './withdraw/withdraw.component';
 import { TransferComponent } from './transfer/transfer.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserRegistrationComponent } from './user-registration/user-registration.component';
+import { UserAdminDashboardComponent } from './user-admin-dashboard/user-admin-dashboard.component';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     DepositComponent,
     WithdrawComponent,
     TransferComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    UserRegistrationComponent,
+    UserAdminDashboardComponent
   ],
   imports: [
     BrowserModule,

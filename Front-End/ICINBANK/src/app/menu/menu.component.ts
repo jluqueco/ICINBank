@@ -23,7 +23,6 @@ export class MenuComponent implements OnInit {
     this.isUserLoggedIn = this.authenticationService.isUserLoggedIn();
     if(this.isUserLoggedIn){
       this.user = this.authenticationService.getUserLoggedIn();
-      console.log('from menu, user athenticated: ' + this.user);
     }
 
     return this.isUserLoggedIn;

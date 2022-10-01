@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { User } from '../dashboard/dashboard.component';
 import { UserDataService } from './data/user-data.service';
 
 @Injectable({
@@ -6,16 +7,11 @@ import { UserDataService } from './data/user-data.service';
 })
 export class ICINAuthenticationService {
   authenticateUser = false;
+  user: User | undefined;
   constructor(private userDataService: UserDataService) { }
 
   authenticate(username: string, password: string){
-    return this.userDataService.authenticateUser(username,password).subscribe(
-      response => {
-        this.authenticateUser = response;
-        return this.authenticateUpdate(username);
-        
-      }
-    )
+    return this.userDataService.authenticateUser(username,password);
   }
 
   isUserLoggedIn(){
@@ -41,5 +37,20 @@ export class ICINAuthenticationService {
     }else{
       return false;
     }
+  }
+
+  isUserAdmin(username: string){
+    return this.userDataService.getUser(username).subscribe(
+      response => { 
+        this.user = response
+        console.log(response);
+        if(this.user.userAdmin){
+          console.log('from icin ' + this.user.userAdmin);
+          return true;
+        }else{
+          return false;
+        }
+      }
+    )
   }
 }

@@ -25,8 +25,10 @@ export class User{
     public phone: string,
     public userAdmin: boolean,
     public password: string,
-    public userAccess: boolean[],
-    public userActive: boolean
+    public depositAccess: boolean,
+    public withdrawAccess: boolean,
+    public transferAccess: boolean,
+    public activeUser: boolean
   ){}
 }
 
