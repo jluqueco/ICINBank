@@ -1,0 +1,32 @@
+<h1 class="title">ChequeBook Request</h1>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-3"> <!--Request box-->
+        <div class="alert alert-success" *ngIf="todoForm.dirty && success">
+          Request# {{cheque.chequeBookID}} has been submitted. Go back to <a routerLink="/dashboard/{{username}}">Home here</a>
+        </div>
+        <form (ngSubmit)="requestChequeBook()" #todoForm="ngForm">
+            <fieldset class="form-group mb-3">
+                <label>Select Account</label>
+                <select [(ngModel)]="accselected" class="form-select" name="dropdown">
+                    <option *ngFor="let account of accounts" [value]="account.accountID" [disabled] = "account.blockStatus" >
+                      {{account.accountID}} / {{account.type}} / {{account.blockStatus}}
+                    </option>
+                  </select>
+            </fieldset>
+
+            <fieldset class="form-group mb-3">
+                <label>Select Type</label>
+                <select [(ngModel)]="typeSelected" class="form-select" name="dropdownrequest">
+                  <option *ngFor="let cheque of cheques" [value]="cheque">ChequeBook of {{cheque}} pages</option>
+                </select>
+            </fieldset>
+      
+            <button id="my-button" type="submit" class="btn btn-danger">Submit Request</button>
+          </form>
+    </div>
+    <div class="col-md-7"> <!--List Box-->
+      
+    </div>
+    <div class="col-md-1"></div>
+</div>
