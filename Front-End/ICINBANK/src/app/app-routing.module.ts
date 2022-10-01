@@ -1,5 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ChequeBookComponent } from './cheque-book/cheque-book.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DepositComponent } from './deposit/deposit.component';
 import { ErrorComponent } from './error/error.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'userprofile/:username', component: UserProfileComponent, canActivate:[RouteGuardService]},
   {path: 'userregistration', component: UserRegistrationComponent},
   {path: 'useradmindashboard/:username', component: UserAdminDashboardComponent},
+  {path: 'chequebook/:username', component: ChequeBookComponent, canActivate: [RouteGuardService]},
   {path: '**', component: ErrorComponent}
 ];
 

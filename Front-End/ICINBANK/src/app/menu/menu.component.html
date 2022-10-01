@@ -8,16 +8,16 @@
             <ul class="navbar-nav">
                 <li class="nav-item"><a *ngIf="authenticationService.isUserLoggedIn()" routerLink="/dashboard/{{user}}" class="nav-link">Home</a></li>
                 <li class="nav-item dropdown">
-                    <a *ngIf="authenticationService.isUserLoggedIn()" href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                    <a *ngIf="authenticationService.isUserLoggedIn()" href="" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
                         Banking Transactions
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" routerLink="">Deposit</a>
+                        <a class="dropdown-item" routerLink="/deposit">Deposit</a>
                         <a class="dropdown-item" routerLink="">Withdraw</a>
                         <a class="dropdown-item" routerLink="">Transfer</a>
                     </div>
                 </li>
-                <li class="nav-item"><a *ngIf="authenticationService.isUserLoggedIn()" routerLink="" class="nav-link">Request ChequeBook</a></li>
+                <li class="nav-item"><a *ngIf="authenticationService.isUserLoggedIn()" routerLink="/chequebook/{{user}}" class="nav-link">Request ChequeBook</a></li>
             </ul>
             <ul class="navbar-nav navbar-collapse justify-content-end">
               <li class="nav-item"><a *ngIf="userloggedIn()" routerLink="/userprofile/{{user}}" class="nav-link"><fa-icon [icon]="faUser" size="sm"></fa-icon></a></li>

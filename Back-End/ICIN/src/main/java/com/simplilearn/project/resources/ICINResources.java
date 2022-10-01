@@ -2,6 +2,7 @@ package com.simplilearn.project.resources;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -180,6 +181,13 @@ public class ICINResources {
 		}else {
 			return new ResponseEntity<ChequeBook>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	//list book types
+	@GetMapping(path = "/chequebook/listtypes")
+	public List<String> getBookTypes(){
+		ChequeBook cheque = new ChequeBook();
+		return cheque.getChequeBookTypes().stream().map(x -> x.substring(5)).collect(Collectors.toList());
 	}
 	
 	//***TRANSACTIONS***

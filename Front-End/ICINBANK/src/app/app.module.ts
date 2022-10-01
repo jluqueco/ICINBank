@@ -21,6 +21,7 @@ import { TransferComponent } from './transfer/transfer.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { UserAdminDashboardComponent } from './user-admin-dashboard/user-admin-dashboard.component';
+import { ChequeBookComponent } from './cheque-book/cheque-book.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { UserAdminDashboardComponent } from './user-admin-dashboard/user-admin-d
     TransferComponent,
     UserProfileComponent,
     UserRegistrationComponent,
-    UserAdminDashboardComponent
+    UserAdminDashboardComponent,
+    ChequeBookComponent
   ],
   imports: [
     BrowserModule,

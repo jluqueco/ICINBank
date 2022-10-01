@@ -1,6 +1,9 @@
 package com.simplilearn.project.entity;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -111,6 +114,14 @@ public class ChequeBook {
 
 	public void setType(ChequeBookType type) {
 		this.type = type;
+	}
+
+	public Long getChequeBookID() {
+		return chequeBookID;
+	}
+	
+	public List<String> getChequeBookTypes(){
+		return Arrays.asList(ChequeBookType.values()).stream().map(Enum::toString).collect(Collectors.toList());
 	}
 
 	@Override

@@ -42,6 +42,18 @@ export class Transaction{
   ){}
 }
 
+export class ChequeBook{
+  constructor(
+    public chequeBookID: number,
+    public account: Account,
+    public status: string,
+    public createdDate: Date,
+    public lastModifiedDate: Date,
+    public type: string
+  ){}
+}
+
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
