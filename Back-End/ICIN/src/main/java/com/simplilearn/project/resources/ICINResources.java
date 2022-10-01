@@ -1,5 +1,6 @@
 package com.simplilearn.project.resources;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -188,6 +189,17 @@ public class ICINResources {
 	public List<String> getBookTypes(){
 		ChequeBook cheque = new ChequeBook();
 		return cheque.getChequeBookTypes().stream().map(x -> x.substring(5)).collect(Collectors.toList());
+	}
+	
+	//list of books by user
+	@GetMapping(path = "/chequebook/list/{username}")
+	public List<ChequeBook> getBooksbyUser(@PathVariable String username){
+		List<Account> accounts = getUserAccount(username);
+		System.out.println("ICIN: user: " + username + " accounts: " + accounts);
+		List<ChequeBook> cheques = chequeBookService.getChequesByAccount(accounts);
+		System.out.println("cheques: " + cheques);
+		
+		return cheques;
 	}
 	
 	//***TRANSACTIONS***

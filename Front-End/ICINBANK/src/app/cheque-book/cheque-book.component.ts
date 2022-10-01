@@ -17,6 +17,7 @@ export class ChequeBookComponent implements OnInit {
   cheques: string[] = [];
   success = false;
   cheque!: ChequeBook;
+  requests: ChequeBook[] = [];
 
   
   constructor(private chequeData: ChequeDataService, 
@@ -34,6 +35,13 @@ export class ChequeBookComponent implements OnInit {
     this.accountData.getAccounts(this.username).subscribe(
       response => {
         this.accounts = response;
+      }
+    )
+
+    this.chequeData.getRequestsByUsername(this.username).subscribe(
+      response => {
+        console.log(response);
+        this.requests = response;
       }
     )
   }

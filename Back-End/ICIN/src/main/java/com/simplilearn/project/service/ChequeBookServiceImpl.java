@@ -1,10 +1,10 @@
 package com.simplilearn.project.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.simplilearn.project.entity.Account;
 import com.simplilearn.project.entity.ChequeBook;
 import com.simplilearn.project.repository.ChequeBookRepository;
 
@@ -50,6 +50,13 @@ public class ChequeBookServiceImpl implements ChequeBookService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<ChequeBook> getChequesByAccount(List<Account> accs) {
+		// TODO Auto-generated method stub
+		//return chequeBookRepository.getChequesByAccounts(accs.stream().map(x -> x.getAccountID()).collect(Collectors.toList()));
+		return chequeBookRepository.getChequesByAccounts(accs);
 	}
 
 }

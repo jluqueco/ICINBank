@@ -29,7 +29,7 @@ enum ChequeBookType{
 	PAGES100
 }
 
-@Entity
+@Entity(name = "chequebooks")
 @Table(name = "CHEQUEBOOKS")
 public class ChequeBook {
 	@Id
@@ -121,6 +121,10 @@ public class ChequeBook {
 	}
 	
 	public List<String> getChequeBookTypes(){
+		return checkChequeBookTypes();
+	}
+	
+	private List<String> checkChequeBookTypes(){
 		return Arrays.asList(ChequeBookType.values()).stream().map(Enum::toString).collect(Collectors.toList());
 	}
 

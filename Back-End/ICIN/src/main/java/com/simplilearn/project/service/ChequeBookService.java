@@ -2,6 +2,7 @@ package com.simplilearn.project.service;
 
 import java.util.List;
 
+import com.simplilearn.project.entity.Account;
 import com.simplilearn.project.entity.ChequeBook;
 
 public interface ChequeBookService {
@@ -9,4 +10,5 @@ public interface ChequeBookService {
 	public ChequeBook save(ChequeBook theBook);
 	public ChequeBook findById(long theBook);
 	public boolean deleteById(long theBook);
+	public List<ChequeBook> getChequesByAccount(List<Account> accs);
 }

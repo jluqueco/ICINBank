@@ -16,4 +16,8 @@ export class ChequeDataService {
   requestBook(account: number, pages: number){
     return this.http.post<ChequeBook>(`http://localhost:8080/chequebook/new/${account}/${pages}`,null);
   }
+
+  getRequestsByUsername(username: string){
+    return this.http.get<ChequeBook[]>(`http://localhost:8080/chequebook/list/${username}`);
+  }
 }

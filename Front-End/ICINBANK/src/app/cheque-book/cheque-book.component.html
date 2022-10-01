@@ -1,4 +1,6 @@
+
 <h1 class="title">ChequeBook Request</h1>
+<div class="container">
 <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-3"> <!--Request box-->
@@ -26,7 +28,30 @@
           </form>
     </div>
     <div class="col-md-7"> <!--List Box-->
-      
+      <div class="container">
+      <table id="table" class="table table-hover table-striped">
+        <caption>{{username}} Requests'</caption>
+        <thead class="thead-dark">
+          <tr id = "mytd">
+            <th>Request ID</th>
+            <th>Create Date</th>
+            <th>Type of Request</th>
+            <th>Account</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let request of requests">
+          <tr>
+            <td>{{request.chequeBookID}}</td>
+            <td>{{request.createdDate | date: 'medium'}}</td>
+            <td>{{request.type}}</td>
+            <td>{{request.account.accountID}} / {{request.account.type}}</td>
+            <td>{{request.status}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     </div>
     <div class="col-md-1"></div>
+</div>
 </div>
