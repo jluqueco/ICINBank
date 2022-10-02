@@ -26,6 +26,8 @@ import { ChequeBookMGMTComponent } from './cheque-book-mgmt/cheque-book-mgmt.com
 import { UserComponent } from './user/user.component';
 import { AdminAccountComponent } from './admin-account/admin-account.component';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
+import { AccountComponent } from './account/account.component';
+import { ChequeAdminComponent } from './cheque-admin/cheque-admin.component';
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import { AdmindashboardComponent } from './admindashboard/admindashboard.compone
     ChequeBookMGMTComponent,
     UserComponent,
     AdminAccountComponent,
-    AdmindashboardComponent
+    AdmindashboardComponent,
+    AccountComponent,
+    ChequeAdminComponent
   ],
   imports: [
     BrowserModule,

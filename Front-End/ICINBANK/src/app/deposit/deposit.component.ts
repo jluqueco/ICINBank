@@ -16,6 +16,7 @@ export class DepositComponent implements OnInit {
     comment: string = '';
     transaction!: Transaction;
     successful: boolean = false;
+    depositError = false;
 
   constructor(private activatedRoute: ActivatedRoute, 
     private accountData: AccountDataService,
@@ -45,6 +46,9 @@ export class DepositComponent implements OnInit {
           this.accselected = 0;
           this.amount = 0;
           this.comment = '';
+        },
+        error => {
+          this.depositError = true;
         }
       )
     }

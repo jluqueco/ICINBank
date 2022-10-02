@@ -32,4 +32,17 @@ export class AccountDataService {
       return this.http.get<Transaction[]>(`http://localhost:8080/transaction/transfer/${accountIDOri}/${accountIDDest}/${amount}/${comment}`);
     }
   }
+
+  getAllAccounts(){
+    return this.http.get<Account[]>(`http://localhost:8080/account/list`);
+  }
+
+  updateAccountStatus(account: Account){
+    console.log(`http://localhost:8080/account/${account.accountID}/${account.blockStatus}`);
+    return this.http.put<Account>(`http://localhost:8080/account/${account.accountID}/${!account.blockStatus}`,null);
+  }
+
+  createAccount(account: Account){
+    return this.http.post<Account>(`http://localhost:8080/account/new`, account);
+  }
 }

@@ -1,7 +1,9 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccountComponent } from './account/account.component';
 import { AdminAccountComponent } from './admin-account/admin-account.component';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
+import { ChequeAdminComponent } from './cheque-admin/cheque-admin.component';
 import { ChequeBookComponent } from './cheque-book/cheque-book.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DepositComponent } from './deposit/deposit.component';
@@ -33,7 +35,9 @@ const routes: Routes = [
   {path: 'chequebook/:username', component: ChequeBookComponent, canActivate: [RouteGuardService]},
   {path: 'user/:username', component: UserComponent, canActivate:[AdminGuardService]},
   {path: 'adminaccount/:username', component: AdminAccountComponent, canActivate:[AdminGuardService]},
+  {path: 'account', component: AccountComponent, canActivate:[AdminGuardService]},
   {path: 'admindashboard/:username', component: AdmindashboardComponent, canActivate:[AdminGuardService]},
+  {path: 'chequeadmin', component: ChequeAdminComponent, canActivate:[AdminGuardService]},
   {path: '**', component: ErrorComponent}
 ];
 

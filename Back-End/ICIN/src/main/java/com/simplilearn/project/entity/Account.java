@@ -117,7 +117,7 @@ public class Account {
 	
 	public Transaction deposit(double amount) {
 		if(!blockStatus) {
-			if(owner.getUserAccess()[0] && owner.isUserActive()) {
+			if(owner.getUserAccess()[0] && owner.isActiveUser()) {
 					Transaction t = new Transaction(amount,TranType.DEPOSIT,new Date(),getBalance());
 					
 					if(amount > 0) {
@@ -138,7 +138,7 @@ public class Account {
 	
 	public Transaction deposit(double amount, String comments) {
 		if(!blockStatus) {
-			if(owner.getUserAccess()[0] && owner.isUserActive()) {
+			if(owner.getUserAccess()[0] && owner.isActiveUser()) {
 					Transaction t = new Transaction(amount,TranType.DEPOSIT,new Date(),getBalance(), comments);
 					
 					if(amount > 0) {
@@ -159,7 +159,7 @@ public class Account {
 	
 	public Transaction withdraw(double amount) {
 		if(!blockStatus) {
-			if(owner.getUserAccess()[1] && owner.isUserActive()) {
+			if(owner.getUserAccess()[1] && owner.isActiveUser()) {
 				Transaction t = new Transaction(amount,TranType.WITHDRAW,new Date(),getBalance());
 				
 				if(balance - amount >= 0) {
@@ -180,7 +180,7 @@ public class Account {
 	
 	public Transaction withdraw(double amount, String comment) {
 		if(!blockStatus) {
-			if(owner.getUserAccess()[1] && owner.isUserActive()) {
+			if(owner.getUserAccess()[1] && owner.isActiveUser()) {
 				Transaction t = new Transaction(amount,TranType.WITHDRAW,new Date(),getBalance(), comment);
 				
 				if(balance - amount >= 0) {
@@ -201,7 +201,7 @@ public class Account {
 	
 	public Transaction[] transfer(double amount, Account destAccount) {
 		if(!blockStatus) {
-			if(owner.getUserAccess()[2] && owner.isUserActive()) {
+			if(owner.getUserAccess()[2] && owner.isActiveUser()) {
 				Transaction tArray[] = new Transaction[2]; //0 for origin, 1 for dest
 				if(destAccount != null && (balance - amount) > 0) {
 					Transaction origin = new Transaction(amount,TranType.TRANSFER_OUT,new Date(),getBalance(), "Transfer made to: " + destAccount.getOwner().getUsername());
@@ -224,7 +224,7 @@ public class Account {
 	
 	public Transaction[] transfer(double amount, Account destAccount, String comment) {
 		if(!blockStatus) {
-			if(owner.getUserAccess()[2] && owner.isUserActive()) {
+			if(owner.getUserAccess()[2] && owner.isActiveUser()) {
 				Transaction tArray[] = new Transaction[2]; //0 for origin, 1 for dest
 				if(destAccount != null && (balance - amount) > 0) {
 					Transaction origin = new Transaction(amount,TranType.TRANSFER_OUT,new Date(),getBalance(), "Transfer made to: " + destAccount.getOwner().getUsername());

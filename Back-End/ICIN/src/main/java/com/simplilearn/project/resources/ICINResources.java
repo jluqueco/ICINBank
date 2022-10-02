@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.simplilearn.project.entity.Account;
@@ -149,6 +150,18 @@ public class ICINResources {
 		System.out.println("\n\n" + account.getTransactions()+"\n\n");
 		
 		return account.getTransactions();
+	}
+	
+	//create Account
+	@PostMapping(path = "/account/new")
+	public ResponseEntity<Account> createAccount(@RequestBody Account account){
+		System.out.println("\n\n***Account***" + account);
+		if(account != null) {
+			Account acc = accountService.save(account);
+			return new ResponseEntity<Account>(acc, HttpStatus.CREATED);
+		}else {
+			return new ResponseEntity<Account>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 	//***CHEQUES***

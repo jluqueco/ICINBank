@@ -9,6 +9,9 @@
         <div class="col-md-4"></div>
         <div class="col-md-4">
             <div class="alert alert-danger"  *ngIf="invalidLogin">Invalid Credentials</div>
+            <div class="alert alert-warning" *ngIf="this.accessError">
+                {{username}} Does not have access. Please contact a representative.
+            </div> 
             <form (ngSubmit)="handleClick()" #todoForm="ngForm">   
                 <fieldset class="input-group mb-3">
                     <span class="input-group-text">Username</span> 

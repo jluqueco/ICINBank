@@ -11,11 +11,13 @@ import { ICINAuthenticationService } from '../service/icinauthentication.service
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   username = '';
   password = '';
   invalidLogin = false;
   faSignInAlt = faSignInAlt;
   faUserPlus = faUserPlus;
+  accessError: boolean = false;
 
 
   constructor(private router: Router, 
@@ -34,10 +36,15 @@ export class LoginComponent implements OnInit {
           this.userData.getUser(this.username).subscribe(
             response => {
               console.log(response);
-              if(response.userAdmin){
-                this.router.navigate(['admindashboard',this.username]);
+              if(response.activeUser){
+                if(response.userAdmin){
+                  this.router.navigate(['admindashboard',this.username]);
+                }else{
+                  this.router.navigate(['dashboard',this.username]);
+                }
               }else{
-                this.router.navigate(['dashboard',this.username]);
+                this.accessError = true;
+                throw new Error('Inactive user.');
               }
             }
           )

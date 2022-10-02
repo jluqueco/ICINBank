@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Account } from '../dashboard/dashboard.component';
+import { AccountDataService } from '../service/data/account-data.service';
 
 @Component({
   selector: 'app-admin-account',
@@ -7,9 +10,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminAccountComponent implements OnInit {
 
-  constructor() { }
+  username = '';
+  accounts: Account[] = [];
+  success = false;
+  constructor(
+    private route: ActivatedRoute,
+    private accountData: AccountDataService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    this.route.snapshot.params['username'];
+    this.accountData.getAllAccounts().subscribe(
+      response => {
+        this.accounts = response;
+      }
+    )
   }
+
+  updateAccount(account: Account) {
+    console.log(account)
+    this.accountData.updateAccountStatus(account).subscribe(
+      response => {
+        console.log(response);
+        this.success = true;
+      }
+    )
+  }
+
+  createAccount() {
+      this.router.navigate(['account']);
+    }
+    
 
 }

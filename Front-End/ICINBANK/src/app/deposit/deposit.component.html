@@ -6,7 +6,10 @@
           {{transaction.type}} Transaction#: {{transaction.transactionID}} was successful, 
           your new balance is: {{transaction.balanceAfterTran | currency}}. Go back to <a routerLink="dashboard/{{username}}">HOME</a>
       </div>
-  </div>
+      <div class="alert alert-warning" *ngIf="todoForm.dirty && depositError">
+        {{username}} Does not have access to make Deposits. Go back to <a routerLink="dashboard/{{username}}">HOME</a>
+    </div> 
+  </div> 
   <div class="col-md-4"></div>
 </div>
 <div class="row">
