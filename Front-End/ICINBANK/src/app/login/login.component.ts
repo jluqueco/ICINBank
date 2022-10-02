@@ -26,9 +26,9 @@ export class LoginComponent implements OnInit {
   }
 
   handleClick(){
+    this.invalidLogin = false;
     this.authenticationService.authenticate(this.username,this.password).subscribe(
       data =>{
-        this.invalidLogin = !data;
         if(data){
           sessionStorage.setItem('authenticatedUser', this.username);
           this.userData.getUser(this.username).subscribe(
@@ -41,7 +41,12 @@ export class LoginComponent implements OnInit {
               }
             }
           )
+        }else{
+          this.invalidLogin = true;
         }
+      },
+      error => {
+        this.invalidLogin=true;
       }
     )
   }

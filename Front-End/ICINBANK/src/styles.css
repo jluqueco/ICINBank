@@ -28,3 +28,8 @@
 .input-group-text {
     width: 100px;
 }
+
+.form-check-input:checked {
+    background-color: #DC3545;
+    border-color: #DC3545;
+}

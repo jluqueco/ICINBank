@@ -18,6 +18,9 @@ export class ChequeBookComponent implements OnInit {
   success = false;
   cheque!: ChequeBook;
   requests: ChequeBook[] = [];
+  isNew = false;
+  isApproved = false;
+  isRejected = false;
 
   
   constructor(private chequeData: ChequeDataService, 
@@ -56,6 +59,34 @@ export class ChequeBookComponent implements OnInit {
         this.cheque = data;
       }
     )  
+  }
+
+  requestStatus(status: string){
+    this.isNew = false;
+    this.isApproved = false;
+    this.isRejected = false;
+    if(status === 'NEW'){
+      this.isNew = true;
+    }else if(status === 'APPROVED'){
+      this.isApproved = true;
+    }else{
+      this.isRejected = true;
+    }
+  }
+
+  isNewStatus(status:string){
+    this.isNew = false;
+    return (status === 'NEW');
+  }
+
+  isApprovedStatus(status:string){
+    this.isApproved = false;
+    return (status === 'APPROVED');
+  }
+
+  isRejectedStatus(status:string){
+    this.isApproved = false;
+    return (status === 'REJECTED');
   }
 
 }

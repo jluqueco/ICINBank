@@ -22,6 +22,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { UserAdminDashboardComponent } from './user-admin-dashboard/user-admin-dashboard.component';
 import { ChequeBookComponent } from './cheque-book/cheque-book.component';
+import { ChequeBookMGMTComponent } from './cheque-book-mgmt/cheque-book-mgmt.component';
+import { UserComponent } from './user/user.component';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { ChequeBookComponent } from './cheque-book/cheque-book.component';
     UserProfileComponent,
     UserRegistrationComponent,
     UserAdminDashboardComponent,
-    ChequeBookComponent
+    ChequeBookComponent,
+    ChequeBookMGMTComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

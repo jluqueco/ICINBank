@@ -21,6 +21,10 @@ export class UserDataService {
   saveUser(user: User){
     return this.http.post<User>(`http://localhost:8080/user/new`,user);
   }
+
+  retreiveUsers(){
+    return this.http.get<User[]>(`http://localhost:8080/user/list`);
+  }
 }
 
 

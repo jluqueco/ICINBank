@@ -1,0 +1,71 @@
+<h1 class="title">Edit User: {{username}}</h1>
+<div class="container">
+    <div class="row">
+        <form (ngSubmit)="updateUser()" #userForm="ngForm" id="userForm"> </form> 
+        <div class="col-md-1">
+            <legend>User Active</legend>
+            <fieldset class="form-check form-check-inline form-switch">
+                <input mdbCheckbox name="activeUser" class="form-check-input" type="checkbox" id="inlineCheckbox4" [(ngModel)]="user.activeUser" [checked]="user.activeUser" form="userForm"/>
+            </fieldset> 
+        </div>
+        
+        <div class="col-md-5">
+            <fieldset class="input-group mb-3">
+                <span class="input-group-text">First Name</span>
+                <input type="text" #name="ngModel" class="form-control" [(ngModel)]="user.name" name="name" form="userForm" [disabled]="!user.activeUser"/>
+            </fieldset>
+
+            <fieldset class="input-group mb-3">
+                <span class="input-group-text">Birthdate</span>
+                <input type="date" #createdDate="ngModel" class="form-control"  [(ngModel)]="user.birthdate" [ngModel]="user.birthdate | date: 'yyyy-MM-dd'" [disabled]="!user.activeUser" (ngModelChange)="user.birthdate=$event" name="birthdate" form="userForm"/>
+            </fieldset>
+            
+            <div class="square">
+                <legend>User access</legend>
+                <fieldset class="form-check form-check-inline form-switch">
+                    <input mdbCheckbox name="deposit" class="form-check-input" type="checkbox" id="inlineCheckbox1" [(ngModel)]="user.userAccess[0]" [checked]="user.userAccess[0]" form="userForm" [disabled]="!user.activeUser"/>
+                    <label for="inlineCheckbox1" class="form-check-label">Deposit</label>
+                </fieldset>
+
+                <fieldset class="form-check form-check-inline form-switch">
+                    <input mdbCheckbox name="withdraw" class="form-check-input" type="checkbox" id="inlineCheckbox2" [(ngModel)]="user.userAccess[1]" [checked]="user.userAccess[1]" form="userForm" [disabled]="!user.activeUser"/>
+                    <label for="inlineCheckbox2" class="form-check-label">Withdraw</label>
+                </fieldset>
+
+                <fieldset class="form-check form-check-inline form-switch">
+                    <input mdbCheckbox name="transfer" class="form-check-input" type="checkbox" id="inlineCheckbox3" [(ngModel)]="user.userAccess[2]" [checked]="user.userAccess[2]" form="userForm" [disabled]="!user.activeUser"/>
+                    <label for="inlineCheckbox3" class="form-check-label">Transfer</label>
+                </fieldset>    
+            </div>
+        </div>
+        <div class="col-md-5">
+            <fieldset class="input-group mb-3">
+                <span class="input-group-text">Last Name</span>
+                <input type="text" name="lastname" class="form-control" [(ngModel)]="user.lastName" form="userForm" [disabled]="!user.activeUser"/>
+            </fieldset>
+
+            <fieldset class="input-group mb-3">
+                <span class="input-group-text">Phone</span>
+                <input type="text" name="phone" class="form-control" [(ngModel)]="user.phone" form="userForm" [disabled]="!user.activeUser"/>
+            </fieldset>
+
+            <fieldset class="input-group mb-3">
+                <span class="input-group-text">Password</span>
+                <input type="password" name="password" class="form-control" [(ngModel)]="user.password" form="userForm" [disabled]="!user.activeUser"/>
+            </fieldset>
+
+            <fieldset class="form-check form-check-inline form-switch">
+                <input mdbCheckbox name="adminUser" class="form-check-input" type="checkbox" id="inlineCheckbox5" [(ngModel)]="user.userAdmin" [checked]="user.userAdmin" form="userForm" disabled/>
+                <label for="inlineCheckbox5" class="form-check-label">Admin User</label>
+            </fieldset> 
+
+            <button class="btn btn-danger btn-lg" form="userForm" [disabled]="!user.activeUser">Submit</button>
+        </div>
+        
+
+        <div class="col-md-1">
+             
+        </div>   
+    </div>
+</div>
+

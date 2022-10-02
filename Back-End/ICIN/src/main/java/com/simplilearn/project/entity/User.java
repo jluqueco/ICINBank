@@ -96,16 +96,10 @@ public class User {
 		this.phone = phone;
 	}
 	
-	public void setDepositAccess(boolean depositAccess) {
-		this.depositAccess = depositAccess;
-	}
-
-	public void setWithdrawAccess(boolean withdrawAccess) {
-		this.withdrawAccess = withdrawAccess;
-	}
-
-	public void setTransferAccess(boolean transferAccess) {
-		this.transferAccess = transferAccess;
+	public void setUserAccess(boolean[] userAccess) {
+		depositAccess = userAccess[0];
+		withdrawAccess = userAccess[1];
+		transferAccess = userAccess[2];
 	}
 
 	public boolean[] getUserAccess() {
@@ -126,10 +120,6 @@ public class User {
 		this.userAdmin = userAdmin;
 	}
 
-	public boolean isUserActive() {
-		return activeUser;
-	}
-
 	public void setUserStatus(boolean blockedUser) {
 		this.activeUser = blockedUser;
 	}
@@ -140,6 +130,18 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public void setWithdrawAccess(boolean withdrawAccess) {
+		this.withdrawAccess = withdrawAccess;
+	}
+
+	public void setActiveUser(boolean activeUser) {
+		this.activeUser = activeUser;
+	}
+
+	public boolean isActiveUser() {
+		return activeUser;
 	}
 
 	@Override

@@ -1,4 +1,9 @@
 
+<script text="application/javascript">
+  $scope.setColor = function() {
+        return "background-color: " + (true ? "#51c5e5" : "#f73a18");
+    };
+</script>
 <h1 class="title">ChequeBook Request</h1>
 <div class="container">
 <div class="row">
@@ -41,7 +46,21 @@
           </tr>
         </thead>
         <tbody *ngFor="let request of requests">
-          <tr>
+          <tr *ngIf="isNewStatus(request.status)" class="bg-primary">
+            <td>{{request.chequeBookID}}</td>
+            <td>{{request.createdDate | date: 'medium'}}</td>
+            <td>{{request.type}}</td>
+            <td>{{request.account.accountID}} / {{request.account.type}}</td>
+            <td>{{request.status}}</td>
+          </tr>
+          <tr *ngIf="isApprovedStatus(request.status)" class="bg-success">
+            <td>{{request.chequeBookID}}</td>
+            <td>{{request.createdDate | date: 'medium'}}</td>
+            <td>{{request.type}}</td>
+            <td>{{request.account.accountID}} / {{request.account.type}}</td>
+            <td>{{request.status}}</td>
+          </tr>
+          <tr *ngIf="isRejectedStatus(request.status)" class="bg-warning">
             <td>{{request.chequeBookID}}</td>
             <td>{{request.createdDate | date: 'medium'}}</td>
             <td>{{request.type}}</td>

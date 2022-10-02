@@ -20,4 +20,8 @@ export class ChequeDataService {
   getRequestsByUsername(username: string){
     return this.http.get<ChequeBook[]>(`http://localhost:8080/chequebook/list/${username}`);
   }
+
+  getRequests(){
+    return this.http.get<ChequeBook[]>(`http://localhost:8080/chequebook/list`);
+  }
 }

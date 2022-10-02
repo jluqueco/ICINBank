@@ -12,6 +12,7 @@ import { TransferComponent } from './transfer/transfer.component';
 import { UserAdminDashboardComponent } from './user-admin-dashboard/user-admin-dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
+import { UserComponent } from './user/user.component';
 import { WithdrawComponent } from './withdraw/withdraw.component';
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: 'userregistration', component: UserRegistrationComponent},
   {path: 'useradmindashboard/:username', component: UserAdminDashboardComponent},
   {path: 'chequebook/:username', component: ChequeBookComponent, canActivate: [RouteGuardService]},
+  {path: 'user/:username', component: UserComponent},
   {path: '**', component: ErrorComponent}
 ];
 
