@@ -1,6 +1,9 @@
 package com.simplilearn.project.resources;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.simplilearn.project.entity.Account;
@@ -42,6 +46,14 @@ public class ICINResources {
 	@GetMapping(path = "/user/list")
 	public List<User> getAllUsers(){
 		return userService.findAll();
+	}
+	
+	//New User
+	@PostMapping(path = "/user/{username}/{name}/{lastName}/{birthdate}/{phone}")
+	public ResponseEntity<User> createUser(@PathVariable String username, @PathVariable String name, @PathVariable String lastName, @PathVariable Date birthdate, @PathVariable String phone){
+		User newUser = new User(username, name, lastName, birthdate, phone);
+		User userCreated = userService.save(newUser);
+		return new ResponseEntity<User>(userCreated, HttpStatus.CREATED);
 	}
 	
 	//New User
@@ -79,6 +91,21 @@ public class ICINResources {
 		}
 	}
 	
+	//checks authentication parameters
+	@GetMapping(path = "/user/{username}/{password}")
+	public ResponseEntity<Boolean> authenticateUser(@PathVariable String username, @PathVariable String password) {
+		if(username != null && password != null) {
+			User user = userService.findById(username);
+			if(user.getPassword().equals(password)) {
+				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+			}else {
+				return new ResponseEntity<Boolean>(false, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		}else {
+			return new ResponseEntity<Boolean>(false, HttpStatus.NOT_FOUND);
+		}
+	}
+	
 	//***ACCOUNTS***
 	
 	//Account List
@@ -91,6 +118,15 @@ public class ICINResources {
 	@GetMapping(path = "/account/{username}")
 	public List<Account> getUserAccount(@PathVariable String username){
 		return accountService.findUserAccounts(username);
+	}
+	
+	//List of accounts by username deleteing a node
+	@GetMapping(path = "/account/{username}/{account}")
+	public List<Account> getUserAccountButID(@PathVariable String username, @PathVariable long account){
+		List<Account> accounts = accountService.findUserAccounts(username);
+		accounts.removeIf(x -> (x.getAccountID() == account));
+		
+		return accounts;
 	}
 	
 	//block/unblock account
@@ -106,6 +142,28 @@ public class ICINResources {
 			return new ResponseEntity<Account>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	//return the transactions of an account
+	@GetMapping(path = "/transactionlist/{accountID}")
+	public List<Transaction> getTransactionsByAccountID(@PathVariable long accountID){
+		Account account = accountService.findById(accountID);
+		System.out.println("\n\n" + account.getTransactions()+"\n\n");
+		
+		return account.getTransactions();
+	}
+	
+	//create Account
+	@PostMapping(path = "/account/new")
+	public ResponseEntity<Account> createAccount(@RequestBody Account account){
+		System.out.println("\n\n***Account***" + account);
+		if(account != null) {
+			Account acc = accountService.save(account);
+			return new ResponseEntity<Account>(acc, HttpStatus.CREATED);
+		}else {
+			return new ResponseEntity<Account>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	//***CHEQUES***
 	
 	//Creates a new book Request
@@ -123,7 +181,10 @@ public class ICINResources {
 	// list books
 	@GetMapping(path = "/chequebook/list")
 	public List<ChequeBook> getAllChequeBooks(){
-		return chequeBookService.findAll();
+		List<ChequeBook> cheques = chequeBookService.findAll();
+		cheques.sort((x, y) -> y.getChequeBookID().compareTo(x.getChequeBookID()));
+		
+		return cheques;
 	}
 	
 	//set status of the book
@@ -139,13 +200,34 @@ public class ICINResources {
 		}
 	}
 	
+	//list book types
+	@GetMapping(path = "/chequebook/listtypes")
+	public List<String> getBookTypes(){
+		ChequeBook cheque = new ChequeBook();
+		return cheque.getChequeBookTypes().stream().map(x -> x.substring(5)).collect(Collectors.toList());
+	}
+	
+	//list of books by user
+	@GetMapping(path = "/chequebook/list/{username}")
+	public List<ChequeBook> getBooksbyUser(@PathVariable String username){
+		List<Account> accounts = getUserAccount(username);
+		System.out.println("ICIN: user: " + username + " accounts: " + accounts);
+		List<ChequeBook> cheques = chequeBookService.getChequesByAccount(accounts);
+		System.out.println("cheques: " + cheques);
+		
+		cheques.sort((x, y) -> y.getChequeBookID().compareTo(x.getChequeBookID()));
+		return cheques;
+		
+	}
+	
 	//***TRANSACTIONS***
 	//deposit
-	@GetMapping(path = "/transaction/deposit/{acc}/{amount}")
-	public ResponseEntity<Transaction> deposit(@PathVariable long acc, @PathVariable double amount){
+	@GetMapping(path = "/transaction/deposit/{acc}/{amount}/{comment}")
+	public ResponseEntity<Transaction> deposit(@PathVariable long acc, @PathVariable double amount, @PathVariable String comment){
 		Account account = accountService.findById(acc);
 		if(account != null) {
-			Transaction tran = account.deposit(amount);
+			Transaction tran = account.deposit(amount, comment);
+			tran.setAccountID(account);
 			transactionService.save(tran);
 			return new ResponseEntity<Transaction>(tran, HttpStatus.OK);
 		}else {
@@ -154,11 +236,12 @@ public class ICINResources {
 	}
 	
 	//Withdraw
-	@GetMapping(path = "/transaction/withdraw/{acc}/{amount}")
-	public ResponseEntity<Transaction> withdraw(@PathVariable long acc, @PathVariable double amount){
+	@GetMapping(path = "/transaction/withdraw/{acc}/{amount}/{comment}")
+	public ResponseEntity<Transaction> withdraw(@PathVariable long acc, @PathVariable double amount, @PathVariable String comment){
 		Account account = accountService.findById(acc);
 		if(account != null) {
-			Transaction tran = account.withdraw(amount);
+			Transaction tran = account.withdraw(amount, comment);
+			tran.setAccountID(account);
 			transactionService.save(tran);
 			return new ResponseEntity<Transaction>(tran, HttpStatus.OK);
 		}else {
@@ -173,6 +256,8 @@ public class ICINResources {
 		Account accountDest = accountService.findById(accdest);
 		if(accountOri != null && accountDest != null) {
 			Transaction tran[] = accountOri.transfer(amount, accountDest);
+			tran[0].setAccountID(accountOri);
+			tran[1].setAccountID(accountDest);
 			transactionService.save(tran[0]);
 			transactionService.save(tran[1]);
 			return new ResponseEntity<Transaction[]>(tran, HttpStatus.OK);
@@ -180,4 +265,21 @@ public class ICINResources {
 			return new ResponseEntity<Transaction[]>(HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	//Transfer
+		@GetMapping(path = "/transaction/transfer/{accori}/{accdest}/{amount}/{comment}")
+		public ResponseEntity<Transaction[]> transferWithComments(@PathVariable long accori, @PathVariable double amount, @PathVariable long accdest, @PathVariable String comment){
+			Account accountOri = accountService.findById(accori);
+			Account accountDest = accountService.findById(accdest);
+			if(accountOri != null && accountDest != null) {
+				Transaction tran[] = accountOri.transfer(amount, accountDest, comment);
+				tran[0].setAccountID(accountOri);
+				tran[1].setAccountID(accountDest);
+				transactionService.save(tran[0]);
+				transactionService.save(tran[1]);
+				return new ResponseEntity<Transaction[]>(tran, HttpStatus.OK);
+			}else {
+				return new ResponseEntity<Transaction[]>(HttpStatus.NOT_FOUND);
+			}
+		}
 }

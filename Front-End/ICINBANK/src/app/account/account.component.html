@@ -1,0 +1,28 @@
+<h1 class="title">New Account</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form (ngSubmit)="registerAccount(userSelected)" #accountForm="ngForm">
+                <fieldset class="form-group mb-3">
+                    <label>Select Type</label>
+                    <select [(ngModel)]="accselected" class="form-select" name="dropdown">
+                      <option value="PRIMARY">PRIMARY</option>
+                      <option value="SAVING">SAVING</option>
+                    </select>
+                </fieldset>
+
+                <fieldset class="form-group mb-3">
+                    <label>Select User</label>
+                    <select [(ngModel)]="userSelected" class="form-select" name="dropdown">
+                      <option *ngFor="let user of users" [value]="user.username">{{user.username}} / {{user.name}} {{user.lastName}}</option>
+                    </select>
+                </fieldset>
+                
+                <button id="my-button" type="submit" class="btn btn-danger">Submit</button>
+            </form>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>

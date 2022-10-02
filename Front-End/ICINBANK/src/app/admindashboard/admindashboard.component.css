@@ -1,0 +1,12 @@
+.iconTransaction{
+    font-size: 200px;
+    color: #DC3545;
+    position: relative;
+    left: 22%;
+}
+
+p{
+    color: #DC3545;
+    text-align: center;
+    font-size: larger;
+}

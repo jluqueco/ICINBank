@@ -1,0 +1,32 @@
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+            <h1 class="title">Request MGMT</h1>
+            <table class="table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Req ID</th>
+                        <th>User</th>
+                        <th>Create Date</th>
+                        <th>Type of Request</th>
+                        <th>Account</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let request of requests">
+                    <tr *ngIf="isNewStatus(request.status)" class="bg-primary">
+                      <td>{{request.chequeBookID}}</td>
+                      <td>{{request.account.owner.username}}</td>
+                      <td>{{request.createdDate | date: 'small'}}</td>
+                      <td>{{request.type}}</td>
+                      <td>{{request.account.accountID}} / {{request.account.type}}</td>
+                      <td><button class="btn btn-success">Approve</button> </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4"></div>
+    </div>
+</div> -->

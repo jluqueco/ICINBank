@@ -1,0 +1,43 @@
+<h1 class="title">Registration</h1>
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <div class="alert alert-success" *ngIf="todoForm.dirty && success">
+      User has been created succesfully, please contact one of our representatives so you can get activated. Go back to <a routerLink="/login">Log In here</a>
+    </div>
+    <form (ngSubmit)="register()" #todoForm="ngForm">
+      <fieldset class="input-group mb-3">
+          <span class="input-group-text">username</span>
+          <input type="text" class="form-control" name="username" [(ngModel)] = "user.username" />
+      </fieldset>
+
+      <fieldset class="input-group mb-3">
+        <span class="input-group-text">First Name</span>
+        <input type="text" class="form-control" name="name" [(ngModel)] = "user.name" />
+      </fieldset>
+
+      <fieldset class="input-group mb-3">
+          <span class="input-group-text">Last Name</span>
+          <input type="text" class="form-control" name="lastName" [(ngModel)] = "user.lastName" />
+      </fieldset>
+
+      <fieldset class="input-group mb-3">
+          <span class="input-group-text">Birthdate</span>
+          <input type="date" class="form-control" name="birthdate" [(ngModel)] = "user.birthdate" />
+      </fieldset>
+
+      <fieldset class="input-group mb-3">
+          <span class="input-group-text">Phone#</span>
+          <input type="tel" class="form-control" name="phone" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" [(ngModel)] = "user.phone" />
+      </fieldset>
+
+      <fieldset class="input-group mb-3">
+        <span class="input-group-text">Password</span>
+        <input type="password" class="form-control" name="password" [(ngModel)] = "user.password" />
+      </fieldset>
+
+      <button id="my-button" type="submit" class="btn btn-danger">Submit</button>
+    </form>
+  </div>
+  <div class="col-md-4"></div>
+</div>
