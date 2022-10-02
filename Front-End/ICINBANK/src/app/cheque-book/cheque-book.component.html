@@ -17,7 +17,7 @@
                 <label>Select Account</label>
                 <select [(ngModel)]="accselected" class="form-select" name="dropdown">
                     <option *ngFor="let account of accounts" [value]="account.accountID" [disabled] = "account.blockStatus" >
-                      {{account.accountID}} / {{account.type}} / {{account.blockStatus}}
+                      {{account.accountID}} / {{account.type}}
                     </option>
                   </select>
             </fieldset>
@@ -48,21 +48,21 @@
         <tbody *ngFor="let request of requests">
           <tr *ngIf="isNewStatus(request.status)" class="bg-primary">
             <td>{{request.chequeBookID}}</td>
-            <td>{{request.createdDate | date: 'medium'}}</td>
+            <td>{{request.createdDate | date: 'dd-MMM-yyyy'}}</td>
             <td>{{request.type}}</td>
             <td>{{request.account.accountID}} / {{request.account.type}}</td>
             <td>{{request.status}}</td>
           </tr>
           <tr *ngIf="isApprovedStatus(request.status)" class="bg-success">
             <td>{{request.chequeBookID}}</td>
-            <td>{{request.createdDate | date: 'medium'}}</td>
+            <td>{{request.createdDate | date: 'dd-MMM-yyyy'}}</td>
             <td>{{request.type}}</td>
             <td>{{request.account.accountID}} / {{request.account.type}}</td>
             <td>{{request.status}}</td>
           </tr>
-          <tr *ngIf="isRejectedStatus(request.status)" class="bg-warning">
+          <tr *ngIf="isRejectedStatus(request.status)" class="bg-danger">
             <td>{{request.chequeBookID}}</td>
-            <td>{{request.createdDate | date: 'medium'}}</td>
+            <td>{{request.createdDate | date: 'dd-MMM-yyyy'}}</td>
             <td>{{request.type}}</td>
             <td>{{request.account.accountID}} / {{request.account.type}}</td>
             <td>{{request.status}}</td>

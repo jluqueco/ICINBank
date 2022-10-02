@@ -9,7 +9,10 @@ import { ChequeDataService } from '../service/data/cheque-data.service';
 })
 export class ChequeAdminComponent implements OnInit {
 
+  rejected = false;
+  approved = false;
   requests: ChequeBook[] = [];
+  chequeSuccess!: ChequeBook;
   constructor(
     private chequeData: ChequeDataService
   ) { }
@@ -24,6 +27,33 @@ export class ChequeAdminComponent implements OnInit {
 
   isNewStatus(status:string){
     return (status === 'NEW');
+  }
+
+  isApprovedStatus(status:string){
+    return (status === 'APPROVED');
+  }
+
+  isRejectedStatus(status:string){
+    return (status === 'REJECTED');
+  }
+
+  rejectRequest(cheque: ChequeBook) {
+    this.chequeData.setStatus(cheque.chequeBookID,'REJECTED').subscribe(
+      response => {
+        console.log(response);
+        this.rejected = true;
+        this.chequeSuccess = response;
+      }
+    );
+  }
+  approveRequest(cheque: ChequeBook) {
+    this.chequeData.setStatus(cheque.chequeBookID,'APPROVED').subscribe(
+      response => {
+        console.log(response);
+        this.approved = true;
+        this.chequeSuccess = response;
+      }
+    );
   }
 
 }

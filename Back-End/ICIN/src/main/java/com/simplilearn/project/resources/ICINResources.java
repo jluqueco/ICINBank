@@ -181,7 +181,10 @@ public class ICINResources {
 	// list books
 	@GetMapping(path = "/chequebook/list")
 	public List<ChequeBook> getAllChequeBooks(){
-		return chequeBookService.findAll();
+		List<ChequeBook> cheques = chequeBookService.findAll();
+		cheques.sort((x, y) -> y.getChequeBookID().compareTo(x.getChequeBookID()));
+		
+		return cheques;
 	}
 	
 	//set status of the book
@@ -212,7 +215,9 @@ public class ICINResources {
 		List<ChequeBook> cheques = chequeBookService.getChequesByAccount(accounts);
 		System.out.println("cheques: " + cheques);
 		
+		cheques.sort((x, y) -> y.getChequeBookID().compareTo(x.getChequeBookID()));
 		return cheques;
+		
 	}
 	
 	//***TRANSACTIONS***

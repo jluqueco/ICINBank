@@ -24,4 +24,8 @@ export class ChequeDataService {
   getRequests(){
     return this.http.get<ChequeBook[]>(`http://localhost:8080/chequebook/list`);
   }
+
+  setStatus(id:number, status: string){
+    return this.http.put<ChequeBook>(`http://localhost:8080/chequebook/${id}/${status}`, null);
+  }
 }
