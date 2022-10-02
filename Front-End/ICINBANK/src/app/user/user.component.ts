@@ -29,7 +29,7 @@ export class UserComponent implements OnInit {
     this.userData.saveUser(this.user).subscribe(
       response => {
         console.log(response);
-        //this.route.navigate(['useradmindashboard',this.username])
+        this.route.navigate(['useradmindashboard',this.username])
       }
     )
   }

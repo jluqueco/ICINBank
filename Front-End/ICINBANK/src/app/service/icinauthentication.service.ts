@@ -22,8 +22,11 @@ export class ICINAuthenticationService {
 
   getUserLoggedIn(){
     let user = sessionStorage.getItem('authenticatedUser');
-
-    return user;
+    if(user != null){
+      return user;
+    }else{
+      return '';
+    }
   }
 
   logout(){
@@ -39,18 +42,22 @@ export class ICINAuthenticationService {
     }
   }
 
-  isUserAdmin(username: string){
-    return this.userDataService.getUser(username).subscribe(
-      response => { 
-        this.user = response
-        console.log(response);
-        if(this.user.userAdmin){
-          console.log('from icin ' + this.user.userAdmin);
-          return true;
-        }else{
-          return false;
+  isUserAdmin(){
+    if (this.getUserLoggedIn() != ''){
+      return this.userDataService.getUser(this.getUserLoggedIn()).subscribe(
+        response => { 
+          this.user = response
+          console.log(response);
+          if(this.user.userAdmin){
+            console.log('from icin ' + this.user.userAdmin);
+            return true;
+          }else{
+            return false;
+          }
         }
-      }
-    )
+      )
+    }else{
+      return false;
+    }
   }
 }

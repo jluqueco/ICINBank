@@ -1,0 +1,16 @@
+<h1 class="title">Welcome to the admin portal, please choose one of these options</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <a routerLink="/useradmindashboard/{username}"> <fa-icon class="iconTransaction" [icon]="faUsers" size="sm" ></fa-icon>
+        <p>User Management</p></a>
+    </div>
+    <div class="col-md-4">
+        <a routerLink="/adminaccount/{username}"><fa-icon class="iconTransaction" [icon]="faPiggyBank" size="sm" ></fa-icon>
+        <p>Account Management</p></a>
+    </div>
+    <div class="col-md-4">
+        <fa-icon class="iconTransaction" [icon]="faMoneyCheck" size="sm"></fa-icon>
+        <p>ChequeBook Request Management</p>
+    </div>
+</div>

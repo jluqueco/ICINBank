@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
             response => {
               console.log(response);
               if(response.userAdmin){
-                this.router.navigate(['useradmindashboard',this.username]);
+                this.router.navigate(['admindashboard',this.username]);
               }else{
                 this.router.navigate(['dashboard',this.username]);
               }

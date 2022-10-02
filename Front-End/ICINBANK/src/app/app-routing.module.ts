@@ -1,11 +1,14 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminAccountComponent } from './admin-account/admin-account.component';
+import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { ChequeBookComponent } from './cheque-book/cheque-book.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DepositComponent } from './deposit/deposit.component';
 import { ErrorComponent } from './error/error.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { AdminGuardService } from './service/admin-guard.service';
 import { RouteGuardService } from './service/route-guard.service';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransferComponent } from './transfer/transfer.component';
@@ -26,9 +29,11 @@ const routes: Routes = [
   {path: 'transfer/:username', component: TransferComponent, canActivate:[RouteGuardService]},
   {path: 'userprofile/:username', component: UserProfileComponent, canActivate:[RouteGuardService]},
   {path: 'userregistration', component: UserRegistrationComponent},
-  {path: 'useradmindashboard/:username', component: UserAdminDashboardComponent},
+  {path: 'useradmindashboard/:username', component: UserAdminDashboardComponent, canActivate:[AdminGuardService]},
   {path: 'chequebook/:username', component: ChequeBookComponent, canActivate: [RouteGuardService]},
-  {path: 'user/:username', component: UserComponent},
+  {path: 'user/:username', component: UserComponent, canActivate:[AdminGuardService]},
+  {path: 'adminaccount/:username', component: AdminAccountComponent, canActivate:[AdminGuardService]},
+  {path: 'admindashboard/:username', component: AdmindashboardComponent, canActivate:[AdminGuardService]},
   {path: '**', component: ErrorComponent}
 ];
 
